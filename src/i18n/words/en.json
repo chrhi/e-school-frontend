@@ -1,0 +1,141 @@
+{
+	"nav": {
+		"home": "Home",
+		"about": "About",
+		"product": "Product",
+		"contact": "Contact",
+		"action": "Get a Quote"
+	},
+
+	"hero": {
+		"headline": "Empowering Startup Owners Worldwide",
+		"desc": "We are an innovative agency specializing in building scalable SaaS products and empowering AI startups to transform industries and redefine the future.",
+		"button": "Get the best offer now!"
+	},
+	"services": {
+		"sectionTitle": "Our Services",
+		"sectionDescription": "We specialize in delivering innovative software solutions tailored for startups and enterprises alike.",
+		"saasDevelopment": {
+			"title": "SaaS Application Development",
+			"description": "We build scalable, feature-rich SaaS applications designed to meet your business needs and deliver real value to your users."
+		},
+		"mvpSolutions": {
+			"title": "MVP Solutions for Startups",
+			"description": "We design and develop Minimum Viable Products (MVPs) to help you quickly test your idea, gather feedback, and achieve success."
+		},
+		"customWebsites": {
+			"title": "Custom Corporate Websites",
+			"description": "We craft modern, responsive websites using Next.js. Whether you need a stunning portfolio or a complete corporate portal, we bring your vision to life."
+		},
+		"ecommerceStores": {
+			"title": "E-commerce Store Development",
+			"description": "Harness the power of Next.js to build high-performing, SEO-friendly e-commerce stores with seamless and secure shopping experiences."
+		},
+		"userFriendly": {
+			"title": "User-Centric Design",
+			"description": "We prioritize creating intuitive and visually appealing designs to enhance user engagement and drive success."
+		},
+		"secureScalable": {
+			"title": "Secure and Scalable Solutions",
+			"description": "We deliver software built with scalability and security in mind, enabling you to grow without limits while keeping your data safe."
+		}
+	},
+	"callToAction": {
+		"title": "Ready to bring your ideas to life?",
+		"subtitle": "Let’s make it happen.",
+		"description": "Collaborate with us to create tailored solutions for your business. Your journey to success starts here.",
+		"buttonText": "📅 Book Now",
+		"satisfactionTitle": "Satisfaction Guaranteed",
+		"satisfactionDescription": "Your success is our priority. We’ll work with you until you’re completely satisfied."
+	},
+	"testimonials": {
+		"title": "Trusted by Market Experts",
+		"description": "Testimonials from Satisfied Clients"
+	},
+	"faq": {
+		"title": "Frequently Asked Questions",
+		"subtitle": "See the most common questions of new traders answered here.",
+		"questions": {
+			"q1": {
+				"question": "How Does EliteScalper Work?",
+				"answer": "EliteScalper is an advanced Expert Advisor designed to identify and execute high-potential scalping opportunities with precision. Utilizing sophisticated algorithms, it analyzes market conditions and filters out noise to focus on setups with a high probability of success.\n\nWith a robust risk management framework, EliteScalper ensures that every trade aligns with your predefined risk parameters, protecting your investment while optimizing profit potential. Experience the power of automated trading with EliteScalper and take your trading strategy to the next level."
+			},
+			"q2": {
+				"question": "Does the Software Work on MT4 / MT5?",
+				"answer": "Yes, EliteScalper works on both MT5 & MT4."
+			},
+			"q3": {
+				"question": "Are there any risks associated with using the EA?",
+				"answer": "As with any trading activity, there is always a risk of loss. Automated trading solutions can help mitigate some risks by employing consistent and tested strategies, but they cannot completely eliminate the inherent risks associated with trading in financial markets. We recommend a cautious approach and thorough understanding of the risks before starting."
+			},
+			"q4": {
+				"question": "Will I get guidance on how to set up the EA correctly?",
+				"answer": "Yes, after purchase, tutorial & instructions will be sent to your email."
+			},
+			"q5": {
+				"question": "Can the EA pass prop firm evaluations?",
+				"answer": "The EA can indeed pass prop firm evaluations with careful management, planning, and optimization. Backtesting setfiles provides insight into expected performance under challenge conditions, allowing for risk adjustment to meet prop firm rules and targets. After identifying a balanced set that complies with these rules, it’s advisable to live demo test the settings for about 3-5 days for further validation. This process helps ensure that the live test results align with backtesting outcomes, making it a viable strategy to start the challenge with confidence."
+			},
+			"q6": {
+				"question": "Can it be used on a funded account?",
+				"answer": "The EliteScalper is designed for both challenge and funded accounts. Once you secure funding, it's advisable to lower your risk exposure while leveraging the EA's impressive win rate to effectively grow your account."
+			}
+		}
+	},
+	"pricing": {
+		"title": "Trading Advisor Packages",
+		"monthly": {
+			"name": "Three-Month Package",
+			"duration": "Three Month",
+			"price": "$299",
+			"previousPrice": null,
+			"actionButton": "Get Three-Month Subscription",
+			"bullets": {
+				"benefit1": "Access to expert trading insights",
+				"benefit2": "Daily market analysis",
+				"benefit3": "Entry and exit signals",
+				"benefit4": "Custom trading alerts"
+			}
+		},
+		"semiAnnual": {
+			"name": "Six-Month Package",
+			"duration": "Six Months",
+			"price": "$449",
+			"previousPrice": "$720",
+			"actionButton": "Get Six-Month Subscription",
+			"bullets": {
+				"benefit1": "Access to expert trading insights",
+				"benefit2": "Priority customer support",
+				"benefit3": "In-depth trading courses",
+				"benefit4": "Exclusive seminars and workshops",
+				"benefit5": "Weekly performance reports",
+				"benefit6": "Advanced trading strategies"
+			}
+		},
+		"annual": {
+			"name": "One-Year Package",
+			"duration": "One Year",
+			"price": "$999",
+			"previousPrice": "$1440",
+			"actionButton": "Get Annual Subscription",
+			"bullets": {
+				"benefit1": "Access to expert trading insights",
+				"benefit2": "Dedicated account manager",
+				"benefit3": "Custom trading plans",
+				"benefit4": "24/7 support",
+				"benefit5": "Quarterly strategy reviews",
+				"benefit6": "Access to all premium features",
+				"benefit7": "Priority event registration"
+			}
+		}
+	},
+	"footer": {
+		"resources": "Resources",
+		"support": "Support",
+		"company": "Company",
+		"privacyPolicy": "Privacy Policy",
+		"termsConditions": "Terms & Conditions",
+		"inc": "INC.",
+		"allRightsReserved": "All rights reserved"
+	}
+}
