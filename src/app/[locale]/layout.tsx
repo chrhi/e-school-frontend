@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 const poppins = Poppins({
 	subsets: ["latin"],
 	weight: ["100", "300", "400", "500", "600"],
+	variable: "--font-poppins",
 });
 
 export function generateStaticParams() {
