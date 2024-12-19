@@ -12,7 +12,7 @@ export default function Page() {
     <>
       <NavBar />
 
-      <div className="w-full mt-8 md:mt-0 relative min-h-screen bg-[#FFF3E4]">
+      <div className="w-full relative min-h-screen bg-[#FFF3E4]">
         <MaxWidthWrapper>
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 pt-16 md:pt-24 pb-16">
             {/* Left Column - Text Content */}

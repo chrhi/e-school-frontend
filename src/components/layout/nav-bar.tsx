@@ -81,12 +81,17 @@ export default function NavBar() {
                 </button>
               ))}
               <div className="flex flex-col gap-y-2">
-                <button className="px-4 py-3 font-bold rounded-2xl hover:bg-gray-100 transition-colors">
-                  login
-                </button>
-                <button className="px-4 py-3 bg-[#F48C06] font-bold rounded-2xl text-white hover:bg-[#e07e05] transition-colors">
-                  sign up
-                </button>
+                <Link href={"/en/sign-up"}>
+                  <button className="px-4 py-3 font-bold rounded-2xl hover:bg-gray-100 transition-colors">
+                    login
+                  </button>
+                </Link>
+
+                <Link href={"/en/sign-up"}>
+                  <button className="px-4 py-3 bg-[#F48C06] font-bold rounded-2xl text-white hover:bg-[#e07e05] transition-colors">
+                    sign up
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
