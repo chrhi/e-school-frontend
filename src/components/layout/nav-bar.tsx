@@ -65,7 +65,7 @@ export default function NavBar() {
               href={"/en/sign-up"}
               className="px-4 py-2  bg-[#f46506]  font-extrabold rounded-full text-white hover:bg-[#e07e05] transition-colors"
             >
-              register
+              register now
             </Link>
           </div>
         </div>
