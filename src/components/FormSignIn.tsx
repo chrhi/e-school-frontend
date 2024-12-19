@@ -16,14 +16,14 @@ const FormSignUp = () => {
             <form className="flex flex-col gap-8">
           
 
-      {/* Username */}
+      {/* Email */}
       <div>
-                <label className="block  mb-2 " htmlFor="user">
-                  User name
+                <label className="block  mb-2 " htmlFor="Email">
+                  Email
                 </label>
                 <Input
                   type="text"
-                  placeholder="Enter your User name"
+                  placeholder="Enter your Email"
                   className="w-full text-md "
                   id="user"
                 />
@@ -45,13 +45,13 @@ const FormSignUp = () => {
 									<input type="checkbox" className="mr-2 " />
 									Remember me
 								</label>
-								<a href={"/"} className=" text-sm">
+								<a href="./sign-in/reset-password" className=" text-sm">
 									Forgot Password ?
 								</a>
 							</div>
               <button
                 type="submit"
-                className="w-full bg-[#f46506] text-white p-4  rounded-full "
+                className="w-full bg-[#F48C06] text-white p-4  rounded-full "
               >
                 Login
               </button>

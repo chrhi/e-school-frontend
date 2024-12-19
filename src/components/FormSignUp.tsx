@@ -5,15 +5,15 @@ import PasswordInput from './PasswordInput';
 const FormSignUp = () => {
   return (
     
-      <div className=" items-center justify-center mt-20 mb-4  w-[454px] h-[611px] ">
+      <div className=" items-center justify-center mt-14 mb-4  w-[454px] h-[611px] ">
         <div className=" mb-6 ">
           <h1 className="flex justify-center text-2xl ">Welcome to lorem..!</h1>
         </div>
-        <p className=" text-start mt-10 mb-8 text-gray-600">
+        <p className=" text-start mt-8 mb-6 text-gray-600">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry.
             </p>
-            <form className="flex flex-col gap-8">
+            <form className="flex flex-col gap-6">
               {/* Email Address */}
             <div>
                 <label className="block  mb-2 " htmlFor="Email">
@@ -50,16 +50,25 @@ const FormSignUp = () => {
                   <PasswordInput />
                 </div>
               </div>
+         {/* Confirme Password */}
+         <div>
+                <label className="block  mb-2" htmlFor="pass">
+                Confirme Password
+                </label>
+                <div className="relative" id="pass">
+                  <PasswordInput />
+                </div>
+              </div>
        
               
               <button
                 type="submit"
-                className="w-full bg-[#f46506] text-white p-4  rounded-full "
+                className="w-full bg-[#F48C06] text-white p-4  rounded-full "
               >
                 Register
               </button>
             
-        <div className='flex justify-center m gap-1'>
+        <div className='flex justify-center  gap-1'>
         <p className='font-portLligatSlab text-lg'>Have an Account ?</p>
         <a href="./sign-in" className=" text-[#f46506] font-portLligatSlab text-lg">Login in</a>
         </div>
