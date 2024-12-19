@@ -26,11 +26,11 @@ export default function NavBar() {
 
   return (
     <div
-      className={`w-full h-[80px] z-[100] fixed top-0 transition-colors duration-300 border-b ${
+      className={`w-full h-[70px] z-[100] fixed top-0 transition-colors duration-300 border-b ${
         isScrolled ? "bg-white shadow-md " : " bg-white "
       }`}
     >
-      <MaxWidthWrapper className="flex items-center justify-between w-full h-[80px]">
+      <MaxWidthWrapper className="flex items-center justify-between w-full h-[70px]">
         <span className="text-2xl text-[#113C49] font-bold">logo</span>
 
         {/* Mobile Menu Button */}
