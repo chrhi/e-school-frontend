@@ -11,70 +11,8 @@ export default function Page() {
   return (
     <>
       <NavBar />
-      {/* <div className="w-full relative min-h-[800px] bg-[#FFF3E4] overflow-hidden">
-        <MaxWidthWrapper>
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 mt-[70px] pb-16">
-            <div className="w-full flex flex-col justify-center gap-y-6 transition-all duration-1000">
-              <h1 className="text-4xl md:text-6xl font-bold text-[#2F327D] leading-tight">
-                <span className="text-[#F48C06]">Studying</span> Online is now
-                much easier
-              </h1>
 
-              <p className="text-lg text-gray-700 max-w-xl">
-                Join our innovative platform that makes learning interactive and
-                engaging. Start your educational journey today with our
-                expert-led courses.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-4">
-                <button className="px-6 py-4 bg-[#F48C06] font-bold rounded-2xl text-white hover:bg-[#e07e05] transition-all hover:scale-105">
-                  Join now
-                </button>
-
-                <div className="flex items-center gap-3 cursor-pointer group">
-                  <div
-                    className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg 
-                    group-hover:shadow-xl transition-all"
-                  >
-                    <Play className="w-6 h-6 text-[#23BDEE] ml-1" />
-                  </div>
-                  <span className="font-medium group-hover:text-[#F48C06] transition-colors">
-                    Watch how it works
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative w-full flex justify-center">
-              <div className="relative transition-all duration-1000">
-                <img
-                  src="/girl.png"
-                  className="h-[450px] md:h-[650px] object-contain relative z-10"
-                  alt="Student learning online"
-                  loading="eager"
-                />
-
-                <div className="absolute top-20 -left-10 w-20 h-20 bg-[#23BDEE] rounded-full opacity-20 animate-pulse" />
-                <div className="absolute bottom-40 -right-8 w-16 h-16 bg-[#F48C06] rounded-full opacity-20 animate-pulse delay-300" />
-              </div>
-            </div>
-          </div>
-        </MaxWidthWrapper>
-
-        <svg
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          className="absolute bottom-0 left-0 w-full"
-        >
-          <path
-            d="M0,0 C576,33.6 768,86.4 1440,0 L1440,120 L0,120 Z"
-            fill="#fff"
-            className="transition duration-300 ease-in-out"
-          />
-        </svg>
-      </div> */}
-
-      <div className="w-full relative min-h-screen bg-[#FFF3E4]">
+      <div className="w-full mt-8 md:mt-0 relative min-h-screen bg-[#FFF3E4]">
         <MaxWidthWrapper>
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 pt-16 md:pt-24 pb-16">
             {/* Left Column - Text Content */}
