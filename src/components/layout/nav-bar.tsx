@@ -47,7 +47,7 @@ export default function NavBar() {
             {navs.map((item) => (
               <button
                 key={item}
-                className="hover:text-[#F48C06] text-gray-900 transition-colors"
+                className="hover:text-[#f46506] font-bold text-gray-900 transition-colors"
               >
                 {item}
               </button>
@@ -56,14 +56,14 @@ export default function NavBar() {
           <div className="w-fit flex items-center justify-end gap-x-2">
             <Link
               href={"/en/sign-up"}
-              className="px-4 py-2 font-bold rounded-full bg-white border border-[#F48C06] text-[#F48C06] hover:bg-gray-100 transition-colors"
+              className="px-4 py-2 font-bold rounded-full bg-white border border-[#f46506] text-[#f46506] hover:bg-gray-100 transition-colors"
             >
               login
             </Link>
 
             <Link
               href={"/en/sign-up"}
-              className="px-4 py-2 bg-[#F48C06]  font-bold rounded-full text-white hover:bg-[#e07e05] transition-colors"
+              className="px-4 py-2 bg-[#f46506]  font-bold rounded-full text-white hover:bg-[#e07e05] transition-colors"
             >
               register
             </Link>
@@ -77,7 +77,7 @@ export default function NavBar() {
               {navs.map((item) => (
                 <button
                   key={item}
-                  className="text-left hover:text-[#F48C06] transition-colors"
+                  className="text-left hover:text-[#f46506] transition-colors"
                 >
                   {item}
                 </button>
@@ -85,14 +85,14 @@ export default function NavBar() {
               <div className="flex flex-col gap-y-2">
                 <Link
                   href={"/en/sign-up"}
-                  className="px-4 py-3 font-bold rounded-full border-[#F48C06] text-[#F48C06] hover:bg-gray-100 transition-colors"
+                  className="px-4 py-3 font-bold rounded-full border-[#f46506] text-[#f46506] hover:bg-gray-100 transition-colors"
                 >
                   login
                 </Link>
 
                 <Link
                   href={"/en/sign-up"}
-                  className="px-4 py-3 bg-[#F48C06] font-bold rounded-full text-white hover:bg-[#e07e05] transition-colors"
+                  className="px-4 py-3 bg-[#f46506] font-bold rounded-full text-white hover:bg-[#e07e05] transition-colors"
                 >
                   sign up
                 </Link>

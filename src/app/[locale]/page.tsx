@@ -18,7 +18,7 @@ export default function Page() {
             {/* Left Column - Text Content */}
             <div className="w-full flex flex-col justify-center gap-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="text-[#F48C06]">Studying</span>{" "}
+                <span className="text-[#f46506]">Studying</span>{" "}
                 <span className="text-[#2F327D]">Online is now</span>
                 <br />
                 <span className="text-[#2F327D]">much easier</span>
@@ -30,7 +30,7 @@ export default function Page() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-4">
-                <button className="px-8 py-4 bg-[#F48C06] font-semibold rounded-full text-white hover:bg-[#e07e05] transition-colors">
+                <button className="px-8 py-4 bg-[#f46506] font-semibold rounded-full text-white hover:bg-[#e07e05] transition-colors">
                   Join now
                 </button>
 
@@ -38,7 +38,7 @@ export default function Page() {
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all">
                     <Play className="w-5 h-5 text-[#23BDEE] ml-1" />
                   </div>
-                  <span className="font-medium group-hover:text-[#F48C06] transition-colors">
+                  <span className="font-medium group-hover:text-[#f46506] transition-colors">
                     Watch how it works
                   </span>
                 </div>
@@ -125,7 +125,7 @@ export default function Page() {
 
           <div className="w-full h-fit flex flex-wrap items-center justify-center gap-8 px-4">
             <div className="w-[200px]">
-              <p className="text-5xl md:text-7xl text-[#F48C06] text-center">
+              <p className="text-5xl md:text-7xl text-[#f46506] text-center">
                 5K+
               </p>
               <p className="text-gray-800 text-center font-semibold">
@@ -133,7 +133,7 @@ export default function Page() {
               </p>
             </div>
             <div className="w-[200px]">
-              <p className="text-5xl md:text-7xl text-[#F48C06] text-center">
+              <p className="text-5xl md:text-7xl text-[#f46506] text-center">
                 75%
               </p>
               <p className="text-gray-800 text-center font-semibold">
@@ -141,7 +141,7 @@ export default function Page() {
               </p>
             </div>
             <div className="w-[200px]">
-              <p className="text-5xl md:text-7xl text-[#F48C06] text-center">
+              <p className="text-5xl md:text-7xl text-[#f46506] text-center">
                 26
               </p>
               <p className="text-gray-800 text-center font-semibold">
@@ -149,7 +149,7 @@ export default function Page() {
               </p>
             </div>
             <div className="w-[200px]">
-              <p className="text-5xl md:text-7xl text-[#F48C06] text-center">
+              <p className="text-5xl md:text-7xl text-[#f46506] text-center">
                 16
               </p>
               <p className="text-gray-800 text-center font-semibold">
@@ -163,7 +163,7 @@ export default function Page() {
       <MaxWidthWrapper className="mb-12">
         <div className="w-full h-fit gap-y-4 flex flex-col items-center">
           <div className="flex w-full items-center flex-col gap-y-2 mx-auto my-8 px-4">
-            <h2 className="text-4xl font-bold text-[#F48C06] text-center">
+            <h2 className="text-4xl font-bold text-[#f46506] text-center">
               <span className="text-[#2F327D]">All-In-One</span> from primary to
               high school.
             </h2>
@@ -185,7 +185,7 @@ export default function Page() {
               </p>
             </div>
             <div className="w-full relative h-[400px] bg-white border shadow flex flex-col items-center justify-center gap-y-8 p-6">
-              <div className="w-[70px] h-[70px] bg-[#F48C06] rounded-full absolute -top-7"></div>
+              <div className="w-[70px] h-[70px] bg-[#f46506] rounded-full absolute -top-7"></div>
               <p className="text-2xl md:text-3xl font-bold text-[#2F327D] text-center mt-4">
                 Easy Scheduling & Attendance Tracking
               </p>
@@ -221,7 +221,7 @@ export default function Page() {
               Everything you can do in a physical
               <span className="block">
                 classroom,{" "}
-                <span className="text-[#F48C06]">you can do with us</span>
+                <span className="text-[#f46506]">you can do with us</span>
               </span>
             </h2>
 
@@ -230,7 +230,7 @@ export default function Page() {
               eiusmod tempor
             </p>
 
-            <button className="text-[#F48C06] font-medium hover:text-[#e07e05] transition-colors">
+            <button className="text-[#f46506] font-medium hover:text-[#e07e05] transition-colors">
               Learn more
             </button>
           </div>
@@ -251,7 +251,7 @@ export default function Page() {
             </div>
 
             <div className="absolute -top-4 -right-4 w-32 h-32 bg-[#23BDEE] z-[-5]  rounded-2xl"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-[#F48C06] z-[-5]  rounded-2xl"></div>
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-[#f46506] z-[-5]  rounded-2xl"></div>
           </div>
         </div>
       </MaxWidthWrapper>
