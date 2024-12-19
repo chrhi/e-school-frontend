@@ -42,28 +42,30 @@ export default function NavBar() {
         </button>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex w-full flex-grow items-center justify-end gap-x-4">
+        <div className="hidden md:flex w-full flex-grow items-center justify-end gap-x-8">
           <div className="w-fit h-[70px] flex items-center justify-end gap-x-4">
             {navs.map((item) => (
               <button
                 key={item}
-                className="hover:text-[#F48C06] transition-colors"
+                className="hover:text-[#F48C06] text-gray-900 transition-colors"
               >
                 {item}
               </button>
             ))}
           </div>
-          <div className="w-fit flex items-center justify-end gap-x-4">
-            <Link href={"/en/sign-up"}>
-              <button className="px-4 py-3 font-bold rounded-2xl hover:bg-gray-100 transition-colors">
-                login
-              </button>
+          <div className="w-fit flex items-center justify-end gap-x-2">
+            <Link
+              href={"/en/sign-up"}
+              className="px-4 py-2 font-bold rounded-full bg-white border border-[#F48C06] text-[#F48C06] hover:bg-gray-100 transition-colors"
+            >
+              login
             </Link>
 
-            <Link href={"/en/sign-up"}>
-              <button className="px-4 py-3 bg-[#F48C06] font-bold rounded-2xl text-white hover:bg-[#e07e05] transition-colors">
-                register
-              </button>
+            <Link
+              href={"/en/sign-up"}
+              className="px-4 py-2 bg-[#F48C06]  font-bold rounded-full text-white hover:bg-[#e07e05] transition-colors"
+            >
+              register
             </Link>
           </div>
         </div>
@@ -81,16 +83,18 @@ export default function NavBar() {
                 </button>
               ))}
               <div className="flex flex-col gap-y-2">
-                <Link href={"/en/sign-up"}>
-                  <button className="px-4 py-3 font-bold rounded-2xl hover:bg-gray-100 transition-colors">
-                    login
-                  </button>
+                <Link
+                  href={"/en/sign-up"}
+                  className="px-4 py-3 font-bold rounded-full border-[#F48C06] text-[#F48C06] hover:bg-gray-100 transition-colors"
+                >
+                  login
                 </Link>
 
-                <Link href={"/en/sign-up"}>
-                  <button className="px-4 py-3 bg-[#F48C06] font-bold rounded-2xl text-white hover:bg-[#e07e05] transition-colors">
-                    sign up
-                  </button>
+                <Link
+                  href={"/en/sign-up"}
+                  className="px-4 py-3 bg-[#F48C06] font-bold rounded-full text-white hover:bg-[#e07e05] transition-colors"
+                >
+                  sign up
                 </Link>
               </div>
             </div>
