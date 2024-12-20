@@ -90,7 +90,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-white">
+    <section className="py-16 px-4 mb-20 bg-white">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">

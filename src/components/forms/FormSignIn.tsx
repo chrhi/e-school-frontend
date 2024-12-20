@@ -60,13 +60,13 @@ const FormSignIn = () => {
             <label className="flex items-center space-x-2 text-sm text-gray-600">
               <input
                 type="checkbox"
-                className="rounded border-gray-300 text-[#F48C06] focus:ring-[#F48C06]"
+                className="rounded border-gray-300 text-[#f46506] focus:ring-[#f46506]"
               />
               <span>Remember me</span>
             </label>
             <Link
               href="./sign-in/reset-password"
-              className="text-sm text-[#F48C06] hover:text-[#e07f05] transition-colors"
+              className="text-sm text-[#f46506] hover:text-[#e07f05] transition-colors"
             >
               Forgot Password?
             </Link>
@@ -74,7 +74,7 @@ const FormSignIn = () => {
 
           <button
             type="submit"
-            className="w-full bg-[#F48C06] text-white py-3 rounded-full hover:bg-[#e07f05] transition-colors focus:outline-none focus:ring-2 focus:ring-[#F48C06] focus:ring-offset-2 text-sm font-medium"
+            className="w-full bg-[#f46506] text-white py-3 rounded-full hover:bg-[#e07f05] transition-colors focus:outline-none focus:ring-2 focus:ring-[#f46506] focus:ring-offset-2 text-sm font-medium"
           >
             Login
           </button>

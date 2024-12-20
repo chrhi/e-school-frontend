@@ -59,7 +59,7 @@ const FormSignUp = () => {
 
           <button
             type="submit"
-            className="w-full bg-[#F48C06] text-white py-3 rounded-full hover:bg-[#e07f05] transition-colors focus:outline-none focus:ring-2 focus:ring-[#F48C06] focus:ring-offset-2 text-sm font-medium"
+            className="w-full bg-[#f46506] text-white py-3 rounded-full hover:bg-[#e07f05] transition-colors focus:outline-none focus:ring-2 focus:ring-[#f46506] focus:ring-offset-2 text-sm font-medium"
           >
             Create Account
           </button>

@@ -47,7 +47,7 @@ function ForgotPasswordStep({ onNext }: { onNext: () => void }) {
       </div>
       <button
         onClick={onNext}
-        className="bg-[#F48C06] text-white p-3 rounded-full w-full"
+        className="bg-[#f46506] text-white p-3 rounded-full w-full"
       >
         Request Code
       </button>
@@ -78,7 +78,7 @@ function VerificationStep({ onNext }: { onNext: () => void }) {
       <CodeInput />
       <button
         onClick={onNext}
-        className="bg-[#F48C06] text-white p-3 rounded-full w-full"
+        className="bg-[#f46506] text-white p-3 rounded-full w-full"
       >
         Verify
       </button>
@@ -125,7 +125,7 @@ function NewPasswordStep() {
         </div>
       </div>
       <a href="./">
-        <button className="bg-[#F48C06] text-white p-3 rounded-full w-full">
+        <button className="bg-[#f46506] text-white p-3 rounded-full w-full">
           Save New Password
         </button>
       </a>

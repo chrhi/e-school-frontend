@@ -34,9 +34,9 @@ export default function Hero() {
   return (
     <div className="w-full relative min-h-screen bg-gradient-to-br from-[#FFF3E4] to-[#FFE8D2]">
       <MaxWidthWrapper>
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 pt-16 md:pt-24 pb-16">
+        <div className="w-full  grid grid-cols-1 lg:grid-cols-2 gap-8 pt-16 md:pt-24 pb-16">
           <motion.div
-            className="w-full flex flex-col justify-center gap-y-6"
+            className="w-full flex flex-col mt-20 md:mt-0 justify-center gap-y-6"
             initial="hidden"
             animate="visible"
             variants={{
