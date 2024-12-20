@@ -1,19 +1,16 @@
-import Image from "next/image";
+import FormSignUp from "@/components/forms/FormSignUp";
+import Footer from "@/components/layout/footer";
+import NavBar from "@/components/layout/nav-bar";
 
 function page() {
   return (
-    <div className="flex gap-2 justify-around">
-      <div className="flex items-center justify-center h-screen">
-        <Image
-          src="/imageAuth1.svg"
-          alt="Auth Image"
-          width={600}
-          height={600}
-          className=""
-        />
+    <>
+      <NavBar />
+      <div className="flex gap-2 justify-center min-h-screen h-fit pt-10">
+        <FormSignUp />
       </div>
-      <div className=""></div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
