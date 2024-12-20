@@ -1,24 +1,17 @@
-
-import FormSignIn from "@/components/FormSignIn";
-import Image from "next/image";
+import FormSignIn from "@/components/forms/FormSignIn";
+import Footer from "@/components/layout/footer";
+import NavBar from "@/components/layout/nav-bar";
 
 function page() {
   return (
-    <div className="flex gap-2 justify-around">
-		 <div className="">
+    <>
+      <NavBar />
+      <div className="flex gap-2 justify-around">
         <FormSignIn />
       </div>
-      <div className="flex items-center justify-center h-screen">
-        <Image
-          src="/imageAuth2.svg"
-          alt="Auth Image"
-          width={600}
-          height={600}
-          className=""
-        />
-      </div>
-     
-    </div>
+
+      <Footer />
+    </>
   );
 }
 
