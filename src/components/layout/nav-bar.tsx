@@ -35,7 +35,7 @@ export default function NavBar() {
       {showBanner && (
         <div className="bg-gradient-to-r fixed top-0 z-[999] left-0 right-0 from-primary to-red-500 text-white">
           <MaxWidthWrapper>
-            <div className="flex items-center justify-between py-2 text-sm">
+            <div className="flex items-center justify-between py-2 text-[6px] md:text-sm">
               <div className="flex items-center gap-2">
                 <Bell size={16} className="animate-bounce" />
                 <span>
