@@ -66,8 +66,7 @@ export default function AboutUs() {
   return (
     <>
       <NavBar />
-      <div className="w-full bg-white">
-        {/* Hero Section with Gradient and Pattern */}
+      <div className="w-full mb-20 mt-[70px] bg-white">
         <div className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-[#FFF3E4] via-white to-[#F5F7FF] overflow-hidden">
           <div className="absolute inset-0 opacity-30">
             <div className="absolute w-96 h-96 -top-48 -left-48 bg-[#f46506] rounded-full blur-3xl" />
@@ -107,8 +106,7 @@ export default function AboutUs() {
           </MaxWidthWrapper>
         </div>
 
-        {/* Stats Section with Cards */}
-        <MaxWidthWrapper>
+        <MaxWidthWrapper className="mb-20">
           <div className="py-20">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
@@ -134,7 +132,6 @@ export default function AboutUs() {
             </div>
           </div>
 
-          {/* Mission & Vision with Modern Cards */}
           <div className="py-20">
             <div className="grid md:grid-cols-2 gap-12">
               {["Mission", "Vision"].map((type, index) => (
@@ -170,7 +167,6 @@ export default function AboutUs() {
             </div>
           </div>
 
-          {/* Core Values with Modern Cards */}
           <div className="py-20">
             <h2 className="text-4xl font-bold text-center text-[#2F327D] mb-16">
               Our Core Values
@@ -197,7 +193,6 @@ export default function AboutUs() {
             </div>
           </div>
 
-          {/* Team Section with Modern Cards */}
           <div className="py-20">
             <h2 className="text-4xl font-bold text-center text-[#2F327D] mb-16">
               Our Leadership Team
@@ -233,7 +228,7 @@ export default function AboutUs() {
                     <div className="w-32 h-32 mx-auto mb-6 relative">
                       <div className="absolute inset-0 bg-gradient-to-br from-[#f46506] to-[#2F327D] rounded-full opacity-20" />
                       <img
-                        src={`/api/placeholder/128/128`}
+                        src={`/girl.png`}
                         alt={member.name}
                         className="w-full h-full object-cover rounded-full relative z-10"
                       />
@@ -253,12 +248,11 @@ export default function AboutUs() {
             </div>
           </div>
 
-          {/* Modern Call to Action */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="py-20 text-center relative"
+            className="py-20 text-center relative "
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#FFF3E4] to-[#F5F7FF] rounded-3xl" />
             <div className="relative z-10 px-8 py-16">

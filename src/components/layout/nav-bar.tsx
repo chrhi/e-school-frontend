@@ -7,9 +7,9 @@ import Link from "next/link";
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Courses", href: "/en/courses" },
+  { name: "Courses", href: "/" },
   { name: "About", href: "/en/about" },
-  { name: "Contact", href: "/en/contact" },
+  { name: "Contact", href: "/" },
 ];
 
 export default function NavBar() {
