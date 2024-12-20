@@ -75,7 +75,7 @@ export default function NavBar() {
             {/* Logo and Navigation Links */}
             <div className="flex items-center gap-12">
               <Link href="/" className="flex items-center gap-2">
-                <span className="text-2xl font-bold bg-gradient-to-r text-primary text-transparent bg-clip-text">
+                <span className="text-2xl font-bold text-primary  ">
                   Rami school
                 </span>
               </Link>
