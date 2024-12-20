@@ -1,4 +1,3 @@
-import AuthForm from "@/components/authForm";
 import Image from "next/image";
 
 function page() {
@@ -13,9 +12,7 @@ function page() {
           className=""
         />
       </div>
-      <div className="">
-        <AuthForm />
-      </div>
+      <div className=""></div>
     </div>
   );
 }
