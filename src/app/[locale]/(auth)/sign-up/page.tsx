@@ -1,9 +1,13 @@
-import AuthForm from "@/components/authForm";
+
+import FormSignUp from "@/components/FormSignUp";
 import Image from "next/image";
 
 function page() {
   return (
     <div className="flex gap-2 justify-around">
+      <div className="">
+        <FormSignUp />
+      </div>
       <div className="flex items-center justify-center h-screen">
         <Image
           src="/imageAuth1.svg"
@@ -13,9 +17,7 @@ function page() {
           className=""
         />
       </div>
-      <div className="">
-        <AuthForm />
-      </div>
+      
     </div>
   );
 }

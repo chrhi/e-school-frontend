@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // إضافة أيقونات من react-icons
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; 
 
 const PasswordInput = () => {
 	const [password, setPassword] = useState("");
