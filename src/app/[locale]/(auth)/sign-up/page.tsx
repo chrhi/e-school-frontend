@@ -2,7 +2,7 @@ import FormSignUp from "@/components/forms/FormSignUp";
 import Footer from "@/components/layout/footer";
 import NavBar from "@/components/layout/nav-bar";
 
-function page() {
+export default async function Page() {
   return (
     <>
       <NavBar />
@@ -13,5 +13,3 @@ function page() {
     </>
   );
 }
-
-export default page;

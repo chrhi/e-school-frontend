@@ -2,8 +2,29 @@
 
 import React, { useState, useEffect } from "react";
 import MaxWidthWrapper from "@/components/max-with-wrapper";
-import { Menu, X, Bell, ChevronRight } from "lucide-react";
+import {
+  Menu,
+  X,
+  Bell,
+  ChevronRight,
+  User,
+  LogOut,
+  Settings,
+  Book,
+} from "lucide-react";
 import Link from "next/link";
+import { TUser } from "@/types";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { logout } from "@/lib/api-calls/login";
+import { getCurrentUser } from "@/lib/api-calls/auth";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -16,19 +37,81 @@ export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
+  const [user, setUser] = useState<TUser | null>(null);
+
+  const handleLogout = async () => {
+    logout();
+
+    window.location.reload();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    getCurrentUser().then((user) => {
+      console.log(user);
+      setUser(user);
+    });
+  }, []);
+
+  const UserMenu = () => (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="flex items-center gap-2 p-2 rounded-full hover:bg-gray-100 transition-colors">
+        <Avatar className="h-8 w-8">
+          <AvatarImage src={"/"} />
+          <AvatarFallback className="bg-primary/10 text-primary">
+            {user?.name?.charAt(0) || "U"}
+          </AvatarFallback>
+        </Avatar>
+        <span className="hidden md:inline font-medium">{user?.name}</span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <User className="mr-2 h-4 w-4" />
+          Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Book className="mr-2 h-4 w-4" />
+          My Courses
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Settings className="mr-2 h-4 w-4" />
+          Settings
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={handleLogout} className="text-red-600">
+          <LogOut className="mr-2 h-4 w-4" />
+          Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
+  const AuthButtons = () => (
+    <>
+      <Link
+        href="/en/sign-in"
+        className="px-4 py-2 text-primary font-semibold hover:bg-orange-50 rounded-full transition-colors"
+      >
+        Login
+      </Link>
+      <Link
+        href="/en/sign-up"
+        className="px-4 py-2 bg-primary text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
+      >
+        Register Now
+      </Link>
+    </>
+  );
 
   return (
     <>
@@ -62,7 +145,6 @@ export default function NavBar() {
         </div>
       )}
 
-      {/* Main Navigation */}
       <div
         className={`w-full z-50 border-b fixed ${
           showBanner ? "top-8" : "top-0"
@@ -72,15 +154,13 @@ export default function NavBar() {
       >
         <MaxWidthWrapper>
           <div className="flex items-center justify-between h-16">
-            {/* Logo and Navigation Links */}
             <div className="flex items-center gap-12">
               <Link href="/" className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-primary  ">
+                <span className="text-2xl font-bold text-primary">
                   Rami school
                 </span>
               </Link>
 
-              {/* Desktop Navigation */}
               <nav className="hidden md:flex items-center gap-8">
                 {navItems.map((item) => (
                   <Link
@@ -95,21 +175,9 @@ export default function NavBar() {
             </div>
 
             <div className="hidden md:flex items-center gap-4">
-              <Link
-                href="/en/sign-in"
-                className="px-4 py-2 text-primary font-semibold hover:bg-orange-50 rounded-full transition-colors"
-              >
-                Login
-              </Link>
-              <Link
-                href="/en/sign-up"
-                className="px-4 py-2  bg-primary text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
-              >
-                Register Now
-              </Link>
+              {user ? <UserMenu /> : <AuthButtons />}
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -133,18 +201,26 @@ export default function NavBar() {
                   </Link>
                 ))}
                 <div className="grid gap-2 px-4 pt-4 border-t">
-                  <Link
-                    href="/en/sign-in"
-                    className="w-full px-4 py-2 text-center text-primary border border-primary font-semibold rounded-full hover:bg-orange-50 transition-colors"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    href="/en/sign-up"
-                    className="w-full px-4 py-2 text-center bg-gradient-to-r from-primary to-pink-500 text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
-                  >
-                    Register Now
-                  </Link>
+                  {user ? (
+                    <div className="px-4 py-2">
+                      <UserMenu />
+                    </div>
+                  ) : (
+                    <>
+                      <Link
+                        href="/en/sign-in"
+                        className="w-full px-4 py-2 text-center text-primary border border-primary font-semibold rounded-full hover:bg-orange-50 transition-colors"
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        href="/en/sign-up"
+                        className="w-full px-4 py-2 text-center bg-gradient-to-r from-primary to-pink-500 text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
+                      >
+                        Register Now
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </MaxWidthWrapper>

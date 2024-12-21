@@ -2,7 +2,7 @@ import FormSignIn from "@/components/forms/FormSignIn";
 import Footer from "@/components/layout/footer";
 import NavBar from "@/components/layout/nav-bar";
 
-function page() {
+async function page() {
   return (
     <>
       <NavBar />

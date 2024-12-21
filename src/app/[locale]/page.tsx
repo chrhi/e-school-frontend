@@ -107,7 +107,7 @@ const VideoSection = () => (
   </div>
 );
 
-export default function Page() {
+export default async function Page() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <NavBar />

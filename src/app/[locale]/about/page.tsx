@@ -12,7 +12,7 @@ import {
   GraduationCap,
   Sparkles,
 } from "lucide-react";
-import NavBar from "@/components/layout/nav-bar";
+
 import Footer from "@/components/layout/footer";
 
 const fadeIn = {
@@ -65,7 +65,6 @@ export default function AboutUs() {
 
   return (
     <>
-      <NavBar />
       <div className="w-full mb-20 mt-[70px] bg-white">
         <div className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-[#FFF3E4] via-white to-[#F5F7FF] overflow-hidden">
           <div className="absolute inset-0 opacity-30">

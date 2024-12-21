@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { Poppins } from "next/font/google";
 import { notFound } from "next/navigation";
+import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -48,13 +49,15 @@ export default async function RootLayout({
       <body className={fontClass}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="w-full  min-h-screen h-fit">{children}</div>
+
+          <Toaster />
         </NextIntlClientProvider>
       </body>
-
+      {/* 
       <script
         src="//code.tidio.co/f4ntqdkrkcmkov2pbgapiuevig4fhtbq.js"
         async
-      ></script>
+      ></script> */}
     </html>
   );
 }
