@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import MaxWidthWrapper from "@/components/max-with-wrapper";
-import { Menu, X, Bell, ChevronRight } from "lucide-react";
+import { Menu, X, Bell, ChevronRight, Heart, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { TUser } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -64,6 +64,26 @@ export default function NavBar() {
         Register Now
       </Link>
     </>
+  );
+
+  const ShoppingIcons = () => (
+    <div className="flex items-center gap-4 mr-4">
+      <button className="text-gray-600 hover:text-primary transition-colors">
+        <Heart size={24} />
+      </button>
+      <button className="text-gray-600 hover:text-primary transition-colors relative">
+        <ShoppingCart size={24} />
+        <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+          0
+        </span>
+      </button>
+      <button className="text-gray-600 hover:text-primary transition-colors relative">
+        <Bell size={24} />
+        <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+          0
+        </span>
+      </button>
+    </div>
   );
 
   const LoadingSkeleton = () => (
@@ -137,10 +157,13 @@ export default function NavBar() {
               {isLoading ? (
                 <LoadingSkeleton />
               ) : user ? (
-                <UserDropdown
-                  onLogout={handleLogout}
-                  user={{ email: user.email, name: user.name }}
-                />
+                <>
+                  <ShoppingIcons />
+                  <UserDropdown
+                    onLogout={handleLogout}
+                    user={{ email: user.email, name: user.name }}
+                  />
+                </>
               ) : (
                 <AuthButtons />
               )}
@@ -174,12 +197,15 @@ export default function NavBar() {
                       <LoadingSkeleton />
                     </div>
                   ) : user ? (
-                    <div className="px-4 py-2">
-                      <UserDropdown
-                        onLogout={handleLogout}
-                        user={{ email: user.email, name: user.name }}
-                      />
-                    </div>
+                    <>
+                      <div className="flex justify-between px-4 py-2">
+                        <ShoppingIcons />
+                        <UserDropdown
+                          onLogout={handleLogout}
+                          user={{ email: user.email, name: user.name }}
+                        />
+                      </div>
+                    </>
                   ) : (
                     <>
                       <Link
