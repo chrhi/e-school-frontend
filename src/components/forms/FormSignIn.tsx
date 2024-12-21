@@ -4,9 +4,37 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "../PasswordInput";
 import Link from "next/link";
 
+async function login() {
+  const url = "https://elearning-api-alpha.vercel.app/api/v1/auth/login";
+  const credentials = {
+    email: "ramii4@email.com",
+    password: "test123",
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log("Login Successful:", data);
+  } catch (error) {
+    console.error("Login Failed:", error);
+  }
+}
+
 const FormSignIn = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    login().then((res) => console.log(res));
   };
 
   return (
