@@ -7,7 +7,7 @@ import Link from "next/link";
 async function login() {
   const url = "https://elearning-api-alpha.vercel.app/api/v1/auth/login";
   const credentials = {
-    email: "ramii4@email.com",
+    email: "rami4@email.com",
     password: "test123",
   };
 
