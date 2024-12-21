@@ -11,10 +11,8 @@ interface CategoryFilter {
 }
 
 const categories: CategoryFilter[] = [
-  { id: "math", name: "Mathematics", count: 12 },
-  { id: "science", name: "Science", count: 15 },
-  { id: "languages", name: "Languages", count: 8 },
-  { id: "exam-prep", name: "Exam Prep", count: 10 },
+  { id: "SALES", name: "Sales", count: 12 },
+  { id: "RECOMMENDATIONS", name: "Recommerndations", count: 15 },
 ];
 
 const CourseGrid = () => {
