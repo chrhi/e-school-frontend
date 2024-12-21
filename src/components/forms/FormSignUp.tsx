@@ -66,8 +66,8 @@ const FormSignUp: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md my-10 bg-white p-8">
-        <div className="text-center mb-8">
+      <div className="w-full max-w-md my-10 bg-white p-8 shadow-xl">
+        <div className="text-center mb-4">
           <h1 className="text-3xl font-bold text-gray-900">Create Your Account</h1>
           <p className="mt-3 text-sm text-center text-gray-600">
             Join thousands of users and start your journey with us today.
