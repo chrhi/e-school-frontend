@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState } from "react";
@@ -75,7 +76,9 @@ function VerificationStep({ onNext }: { onNext: () => void }) {
       <p className="mb-4 text-gray-600">
         Please enter the 6-digit code sent to your email.
       </p>
-      <CodeInput />
+      <CodeInput value={""} onChange={function (value: string): void {
+        throw new Error("Function not implemented.");
+      } } />
       <button
         onClick={onNext}
         className="bg-[#f46506] text-white p-3 rounded-full w-full"

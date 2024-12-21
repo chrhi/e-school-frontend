@@ -1,34 +1,67 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CodeInput from "@/components/CodeInput";
+import axios from "axios";
 
-interface VerificationStepProps {
-  onNext?: () => void; 
-}
-
-const ConfirmStep: React.FC<VerificationStepProps> = ({ onNext = () => {} }) => {
+const ConfirmStep: React.FC = () => {
   const router = useRouter();
   const [isVerifying, setIsVerifying] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [code, setCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
 
-  const handleVerification = () => {
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("userEmail");
+    console.log("Retrieved email from localStorage:", savedEmail); 
+    if (savedEmail) {
+      setEmail(savedEmail);
+    }
+  }, []);
+
+  const handleVerification = async () => {
+    if (!email) {
+      setErrorMessage("Email is missing.");
+      return;
+    }
+
+    if (!code) {
+      setErrorMessage("Please provide the OTP.");
+      return;
+    }
+
+
+
     setIsVerifying(true);
+    setErrorMessage(null);
 
-    // Simulate verification process
-    setTimeout(() => {
+    try {
+      const response = await axios.post(
+        `https://elearning-api-alpha.vercel.app/api/v1/auth/verify-email`,
+        { "otp": code, "email": email }, // Ensure both code and email are provided
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      console.log("Response Data:", response.data);
+
+      if (response.data.success) {
+        setIsVerified(true);
+
+        setTimeout(() => {
+          router.push("/sign-in"); 
+        }, 2000); 
+      } else {
+        setErrorMessage(response.data.message || "Invalid verification code. Please try again.");
+      }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Error details:", error.response?.data || error.message);
+      setErrorMessage(error.response?.data?.message || "An error occurred during verification. Please try again.");
+    } finally {
       setIsVerifying(false);
-      setIsVerified(true);
-
-      // Call onNext if provided
-      onNext();
-
-      // Redirect to login after showing success message
-      setTimeout(() => {
-        router.push("../sign-in"); // Replace with your login page route
-      }, 2000); // Wait 2 seconds before redirecting
-    }, 3000); // Simulate 3 seconds verification delay
+    }
   };
 
   return (
@@ -42,40 +75,29 @@ const ConfirmStep: React.FC<VerificationStepProps> = ({ onNext = () => {} }) => 
             width={112}
             height={112}
           />
-
-          <h2 className="text-4xl font-semibold text-gray-900 mb-4">
-            Verify Your Email
-          </h2>
-
+          <h2 className="text-4xl font-semibold text-gray-900 mb-4">Verify Your Email</h2>
           <p className="text-sm text-gray-600 mb-6">
-            Please check your email: email@email.com
+            Please check your email: {email}
           </p>
 
-          <CodeInput />
+          <CodeInput value={code} onChange={setCode} />
+
+          {errorMessage && <div className="text-red-500 mt-4">{errorMessage}</div>}
 
           {isVerified ? (
-            <p className="text-green-500 text-sm mt-4">
-              Account successfully created! Redirecting to login...
-            </p>
+            <div className="text-green-500 mt-4">Verification successful! Redirecting...</div>
           ) : (
             <button
               onClick={handleVerification}
+              className="w-full bg-[#f46506] text-white py-3 rounded-full mt-4"
               disabled={isVerifying}
-              className={`p-3 rounded-full w-full mt-4 transition duration-300 ${
-                isVerifying
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-[#f46506] hover:bg-[#d45605] text-white"
-              }`}
             >
               {isVerifying ? "Verifying..." : "Verify"}
             </button>
           )}
-
-          <div className="flex justify-between mt-4">
-            <a href="./" className="text-gray-500 text-sm">
-              back to Register
-            </a>
-          </div>
+          <a href="./" className="text-gray-500 text-sm mt-4">
+            back to register
+          </a>
         </div>
       </div>
     </div>

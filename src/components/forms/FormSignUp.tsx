@@ -8,9 +8,8 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "../PasswordInput";
 import Link from "next/link";
 
-
 const validationSchema = Yup.object({
-  name: Yup.string().min(4,"the min caracter is 4").required("Full Name is required"),
+  name: Yup.string().min(4, "The min character is 4").required("Full Name is required"),
   email: Yup.string().email("Invalid email format").required("Email is required"),
   password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
   confirmPassword: Yup.string()
@@ -40,6 +39,9 @@ const FormSignUp: React.FC = () => {
     validationSchema,
     onSubmit: async (values) => {
       try {
+        localStorage.setItem("userEmail", values.email);
+
+        // إرسال بيانات التسجيل إلى الباك إند
         const response = await axios.post(
           "https://elearning-api-alpha.vercel.app/api/v1/auth/signup",
           {
@@ -58,8 +60,12 @@ const FormSignUp: React.FC = () => {
           err.message ||
           "There was an issue creating the account. Please try again later.";
 
-       
-        formik.setFieldValue("general", errorMessage);
+      
+        if (err.response?.data?.message === "Email already exists") {
+          formik.setFieldError("email", "This email is already registered");
+        } else {
+          formik.setFieldValue("general", errorMessage);
+        }
       }
     },
   });
