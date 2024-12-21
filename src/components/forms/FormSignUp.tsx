@@ -1,15 +1,14 @@
-"use client"
+"use client";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "../PasswordInput";
 import Link from "next/link";
 
 const validationSchema = Yup.object({
-  name: Yup.string().min(4, "The min character is 4").required("Full Name is required"),
+  name: Yup.string().min(4, "The minimum character count is 4").required("Full Name is required"),
   email: Yup.string().email("Invalid email format").required("Email is required"),
   password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
   confirmPassword: Yup.string()
@@ -22,7 +21,7 @@ interface FormValues {
   email: string;
   password: string;
   confirmPassword: string;
-  general?: string; 
+  general?: string;
 }
 
 const FormSignUp: React.FC = () => {
@@ -34,37 +33,45 @@ const FormSignUp: React.FC = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      general: "", 
+      general: "",
     },
     validationSchema,
     onSubmit: async (values) => {
       try {
         localStorage.setItem("userEmail", values.email);
 
-        // إرسال بيانات التسجيل إلى الباك إند
-        const response = await axios.post(
-          "https://elearning-api-alpha.vercel.app/api/v1/auth/signup",
-          {
+        const response = await fetch("https://elearning-api-alpha.vercel.app/api/v1/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
             name: values.name,
             email: values.email,
             password: values.password,
-          }
-        );
+          }),
+        });
 
-        console.log("Account created:", response.data);
+        if (!response.ok) {
+          throw new Error("Failed to create account");
+        }
+
+        const data = await response.json();
+        console.log("Account created:", data);
+
         router.push("./sign-up/confirme-account");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (err: any) {
-        const errorMessage =
-          err.response?.data?.message ||
-          err.message ||
-          "There was an issue creating the account. Please try again later.";
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          const errorMessage =
+            err.message || "There was an issue creating the account. Please try again later.";
 
-      
-        if (err.response?.data?.message === "Email already exists") {
-          formik.setFieldError("email", "This email is already registered");
+          if (err.message === "Email already exists") {
+            formik.setFieldError("email", "This email is already registered");
+          } else {
+            formik.setFieldValue("general", errorMessage);
+          }
         } else {
-          formik.setFieldValue("general", errorMessage);
+          formik.setFieldValue("general", "An unknown error occurred.");
         }
       }
     },
@@ -72,20 +79,20 @@ const FormSignUp: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md my-10 bg-white p-8 shadow-xl">
-        <div className="text-center mb-4">
+      <div className="w-full max-w-md my-10 bg-white p-8 shadow-xl rounded-lg">
+        <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-gray-900">Create Your Account</h1>
-          <p className="mt-3 text-sm text-center text-gray-600">
+          <p className="mt-2 text-sm text-gray-600">
             Join thousands of users and start your journey with us today.
           </p>
         </div>
 
-        <form className="space-y-4" onSubmit={formik.handleSubmit}>
+        <form className="space-y-6" onSubmit={formik.handleSubmit}>
           {formik.errors.general && (
-            <div className="text-red-500 text-sm">{formik.errors.general}</div>
+            <div className="text-red-500 text-sm mb-2">{formik.errors.general}</div>
           )}
 
-          <div className="space-y-2">
+          <div>
             <label className="text-sm font-medium text-gray-700" htmlFor="name">
               Full Name
             </label>
@@ -93,17 +100,17 @@ const FormSignUp: React.FC = () => {
               type="text"
               id="name"
               placeholder="Your Name"
-              className="w-full"
+              className="w-full mt-2"
               value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             {formik.touched.name && formik.errors.name && (
-              <div className="text-red-500 text-sm">{formik.errors.name}</div>
+              <div className="text-red-500 text-sm mt-1">{formik.errors.name}</div>
             )}
           </div>
 
-          <div className="space-y-2">
+          <div>
             <label className="text-sm font-medium text-gray-700" htmlFor="email">
               Email Address
             </label>
@@ -111,47 +118,43 @@ const FormSignUp: React.FC = () => {
               type="email"
               id="email"
               placeholder="you@example.com"
-              className="w-full"
+              className="w-full mt-2"
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             {formik.touched.email && formik.errors.email && (
-              <div className="text-red-500 text-sm">{formik.errors.email}</div>
+              <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
             )}
           </div>
 
-          <div className="space-y-2">
+          <div>
             <label className="text-sm font-medium text-gray-700" htmlFor="password">
               Password
             </label>
-            <div className="relative">
-              <PasswordInput
-                id="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-            </div>
+            <PasswordInput
+              id="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
             {formik.touched.password && formik.errors.password && (
-              <div className="text-red-500 text-sm">{formik.errors.password}</div>
+              <div className="text-red-500 text-sm mt-1">{formik.errors.password}</div>
             )}
           </div>
 
-          <div className="space-y-2">
+          <div>
             <label className="text-sm font-medium text-gray-700" htmlFor="confirmPassword">
               Confirm Password
             </label>
-            <div className="relative">
-              <PasswordInput
-                id="confirmPassword"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-            </div>
+            <PasswordInput
+              id="confirmPassword"
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
             {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-              <div className="text-red-500 text-sm">{formik.errors.confirmPassword}</div>
+              <div className="text-red-500 text-sm mt-1">{formik.errors.confirmPassword}</div>
             )}
           </div>
 
@@ -163,10 +166,8 @@ const FormSignUp: React.FC = () => {
             {formik.isSubmitting ? "Creating..." : "Create Account"}
           </button>
 
-          <div className="text-center mt-6">
-            <span className="text-sm text-gray-600">
-              Already have an account?{" "}
-            </span>
+          <div className="text-center mt-4">
+            <span className="text-sm text-gray-600">Already have an account? </span>
             <Link
               href="./sign-in"
               className="text-[#f46506] hover:text-[#d55605] font-medium text-sm"

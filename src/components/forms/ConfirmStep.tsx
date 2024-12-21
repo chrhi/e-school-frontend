@@ -3,9 +3,13 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CodeInput from "@/components/CodeInput";
-import axios from "axios";
 
-const ConfirmStep: React.FC = () => {
+
+interface ConfirmStepProps {
+  onNext: () => void;
+}
+
+const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
   const router = useRouter();
   const [isVerifying, setIsVerifying] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
@@ -15,7 +19,7 @@ const ConfirmStep: React.FC = () => {
 
   useEffect(() => {
     const savedEmail = localStorage.getItem("userEmail");
-    console.log("Retrieved email from localStorage:", savedEmail); 
+    console.log("Retrieved email from localStorage:", savedEmail);
     if (savedEmail) {
       setEmail(savedEmail);
     }
@@ -32,33 +36,37 @@ const ConfirmStep: React.FC = () => {
       return;
     }
 
-
-
     setIsVerifying(true);
     setErrorMessage(null);
 
     try {
-      const response = await axios.post(
+      const response = await fetch(
         `https://elearning-api-alpha.vercel.app/api/v1/auth/verify-email`,
-        { "otp": code, "email": email }, // Ensure both code and email are provided
-        { headers: { "Content-Type": "application/json" } }
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ "otp": code, "email": email }),
+        }
       );
 
-      console.log("Response Data:", response.data);
+      const data = await response.json();
 
-      if (response.data.success) {
+      console.log("Response Data:", data);
+
+      if (data.success) {
         setIsVerified(true);
-
         setTimeout(() => {
-          router.push("/sign-in"); 
-        }, 2000); 
+          router.push("/sign-in");
+        }, 2000);
+        onNext();
       } else {
-        setErrorMessage(response.data.message || "Invalid verification code. Please try again.");
+        setErrorMessage(data.message || "Invalid verification code. Please try again.");
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.error("Error details:", error.response?.data || error.message);
-      setErrorMessage(error.response?.data?.message || "An error occurred during verification. Please try again.");
+    } catch (error) {
+      console.error("Error details:", error);
+      setErrorMessage("An error occurred during verification. Please try again.");
     } finally {
       setIsVerifying(false);
     }
