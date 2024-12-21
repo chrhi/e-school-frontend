@@ -2,29 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import MaxWidthWrapper from "@/components/max-with-wrapper";
-import {
-  Menu,
-  X,
-  Bell,
-  ChevronRight,
-  User,
-  LogOut,
-  Settings,
-  Book,
-} from "lucide-react";
+import { Menu, X, Bell, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { TUser } from "@/types";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { logout } from "@/lib/api-calls/login";
 import { getCurrentUser } from "@/lib/api-calls/auth";
+import UserDropdown from "../user-nav";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -38,10 +22,10 @@ export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
   const [user, setUser] = useState<TUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     logout();
-
     window.location.reload();
   };
 
@@ -55,46 +39,15 @@ export default function NavBar() {
   }, []);
 
   useEffect(() => {
-    getCurrentUser().then((user) => {
-      console.log(user);
-      setUser(user);
-    });
+    getCurrentUser()
+      .then((user) => {
+        console.log(user);
+        setUser(user);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
-
-  const UserMenu = () => (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-2 p-2 rounded-full hover:bg-gray-100 transition-colors">
-        <Avatar className="h-8 w-8">
-          <AvatarImage src={"/"} />
-          <AvatarFallback className="bg-primary/10 text-primary">
-            {user?.name?.charAt(0) || "U"}
-          </AvatarFallback>
-        </Avatar>
-        <span className="hidden md:inline font-medium">{user?.name}</span>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
-          Profile
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Book className="mr-2 h-4 w-4" />
-          My Courses
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Settings className="mr-2 h-4 w-4" />
-          Settings
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleLogout} className="text-red-600">
-          <LogOut className="mr-2 h-4 w-4" />
-          Logout
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
 
   const AuthButtons = () => (
     <>
@@ -111,6 +64,12 @@ export default function NavBar() {
         Register Now
       </Link>
     </>
+  );
+
+  const LoadingSkeleton = () => (
+    <div className="flex items-center justify-center">
+      <Skeleton className="h-8 w-8 rounded-full" />
+    </div>
   );
 
   return (
@@ -175,7 +134,16 @@ export default function NavBar() {
             </div>
 
             <div className="hidden md:flex items-center gap-4">
-              {user ? <UserMenu /> : <AuthButtons />}
+              {isLoading ? (
+                <LoadingSkeleton />
+              ) : user ? (
+                <UserDropdown
+                  onLogout={handleLogout}
+                  user={{ email: user.email, name: user.name }}
+                />
+              ) : (
+                <AuthButtons />
+              )}
             </div>
 
             <button
@@ -201,9 +169,16 @@ export default function NavBar() {
                   </Link>
                 ))}
                 <div className="grid gap-2 px-4 pt-4 border-t">
-                  {user ? (
+                  {isLoading ? (
                     <div className="px-4 py-2">
-                      <UserMenu />
+                      <LoadingSkeleton />
+                    </div>
+                  ) : user ? (
+                    <div className="px-4 py-2">
+                      <UserDropdown
+                        onLogout={handleLogout}
+                        user={{ email: user.email, name: user.name }}
+                      />
                     </div>
                   ) : (
                     <>
