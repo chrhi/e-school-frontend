@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import CodeInput from "@/components/CodeInput";
 
 interface VerificationStepProps {
-  onNext?: () => void; // onNext اختياري
+  onNext?: () => void; 
 }
 
 const ConfirmStep: React.FC<VerificationStepProps> = ({ onNext = () => {} }) => {
