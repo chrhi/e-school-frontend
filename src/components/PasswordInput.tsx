@@ -24,6 +24,7 @@ const PasswordInput = React.forwardRef<
     <div className="relative">
       <input
         type={isPasswordVisible ? "text" : "password"}
+         placeholder="Enter Password"
         className={cn(
           "flex w-full rounded-full border border-input border-[#f46506] bg-transparent p-4 px-6 text-base shadow-sm transition-colors focus:ring-[#f46506] file:border-0 file:bg-transparent file:text-sm file:text-foreground placeholder:text-[#ACACAC] focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pr-12",
           className
