@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "../PasswordInput";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const validationSchema = Yup.object({
   name: Yup.string().min(4, "The minimum character count is 4").required("Full Name is required"),
@@ -55,7 +56,10 @@ const FormSignUp: React.FC = () => {
         if (!response.ok) {
           throw new Error("Failed to create account");
         }
-
+        toast.success("check your email please , verifid OTP ", {
+          style: { background: "#dcfce7", color: "#16a34a" },
+          className: "border-green-500",
+        });
         const data = await response.json();
         console.log("Account created:", data);
 

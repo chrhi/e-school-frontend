@@ -62,7 +62,11 @@ export function ClientForgotPasswordForm() {
       if (!response.ok) {
         throw new Error("Failed to send forgot password request.");
       }
-      toast.success("Verification code resent to your email.");
+      
+      toast.success("Verification code resent to your email.", {
+        style: { background: "#dcfce7", color: "#16a34a" },
+        className: "border-green-500",
+      });
       nextStep();
     } catch (error) {
       console.error("Error sending forgot password request:", error);
@@ -91,7 +95,11 @@ export function ClientForgotPasswordForm() {
         console.error("Failed to reset password:", errorResponse);
         throw new Error("Failed to reset password.");
       }
-
+      toast.success("The password is update", {
+        style: { background: "#dcfce7", color: "#16a34a" },
+        className: "border-green-500",
+      });
+      
       nextStep();
     } catch (error) {
       console.error("Error resetting password:", error);

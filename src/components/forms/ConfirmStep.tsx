@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CodeInput from "@/components/CodeInput";
+import { toast } from "sonner";
 
 
 interface ConfirmStepProps {
@@ -57,6 +58,10 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
 
       if (data.success) {
         setIsVerified(true);
+        toast.success("Your account is created ", {
+          style: { background: "#dcfce7", color: "#16a34a" },
+          className: "border-green-500",
+        });
         setTimeout(() => {
           router.push("/sign-in");
         }, 2000);
