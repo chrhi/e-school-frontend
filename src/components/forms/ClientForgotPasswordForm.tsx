@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/PasswordInput";
 import CodeInput from "@/components/CodeInput";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner"; 
+import { toast } from "sonner";
 interface ForgotPasswordPayload {
   email: string;
 }
@@ -51,18 +51,21 @@ export function ClientForgotPasswordForm() {
     const payload: ForgotPasswordPayload = { email };
 
     try {
-      const response = await fetch("https://elearning-api-alpha.vercel.app/api/v1/auth/forgot-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://elearning-api-alpha.vercel.app/api/v1/auth/forgot-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to send forgot password request.");
       }
-      
+
       toast.success("Verification code resent to your email.", {
         style: { background: "#dcfce7", color: "#16a34a" },
         className: "border-green-500",
@@ -75,20 +78,23 @@ export function ClientForgotPasswordForm() {
 
   const handleResetPassword = async () => {
     const payload: ResetPasswordPayload = {
-      "email":"email",
-      "otp":"email",
-      "password":"password",
-      "passwordConfirm":"passwordConfirm",
+      email: "email",
+      otp: "email",
+      password: "password",
+      passwordConfirm: "passwordConfirm",
     };
 
     try {
-      const response = await fetch("https://elearning-api-alpha.vercel.app/api/v1/auth/reset-password", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://elearning-api-alpha.vercel.app/api/v1/auth/reset-password",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (!response.ok) {
         const errorResponse = await response.json();
@@ -99,7 +105,7 @@ export function ClientForgotPasswordForm() {
         style: { background: "#dcfce7", color: "#16a34a" },
         className: "border-green-500",
       });
-      
+
       nextStep();
     } catch (error) {
       console.error("Error resetting password:", error);
@@ -107,7 +113,7 @@ export function ClientForgotPasswordForm() {
   };
 
   return (
-    <div className="bg-white rounded-lg p-8 w-[454px] h-[600px] max-w-lg">
+    <div className="bg-white rounded-2xl p-8 shadow-xl border w-[454px] h-[600px] max-w-lg">
       {step === 1 && (
         <ForgotPasswordStep
           onNext={handleForgotPassword}
@@ -120,7 +126,7 @@ export function ClientForgotPasswordForm() {
           onNext={() => nextStep()}
           otp={otp}
           setOtp={setOtp}
-          email={email} 
+          email={email}
         />
       )}
       {step === 3 && (
@@ -136,7 +142,11 @@ export function ClientForgotPasswordForm() {
   );
 }
 
-function ForgotPasswordStep({ onNext, email, setEmail }: ForgotPasswordStepProps) {
+function ForgotPasswordStep({
+  onNext,
+  email,
+  setEmail,
+}: ForgotPasswordStepProps) {
   return (
     <div className="text-center flex flex-col gap-6">
       <Image
@@ -180,34 +190,40 @@ function ForgotPasswordStep({ onNext, email, setEmail }: ForgotPasswordStepProps
   );
 }
 
-function VerificationStep({ onNext, otp, setOtp, email }: VerificationStepProps) {
+function VerificationStep({
+  onNext,
+  otp,
+  setOtp,
+  email,
+}: VerificationStepProps) {
   const [loading, setLoading] = useState(false); // لإدارة حالة التحميل أثناء إعادة إرسال الكود
 
-
   const handleResendCode = async () => {
-    setLoading(true); 
-    const payload: ForgotPasswordPayload = { email }; 
+    setLoading(true);
+    const payload: ForgotPasswordPayload = { email };
 
     try {
-      const response = await fetch("https://elearning-api-alpha.vercel.app/api/v1/auth/forgot-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://elearning-api-alpha.vercel.app/api/v1/auth/forgot-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to resend code.");
       }
 
-     
       toast.success("Verification code resent to your email.");
     } catch (error) {
       console.error("Error sending verification code:", error);
       alert("Failed to resend code. Please try again.");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -224,10 +240,7 @@ function VerificationStep({ onNext, otp, setOtp, email }: VerificationStepProps)
       <p className="mb-4 text-gray-600">
         Please enter the 6-digit code sent to your email.
       </p>
-      <CodeInput
-        value={otp}
-        onChange={(value) => setOtp(value)}
-      />
+      <CodeInput value={otp} onChange={(value) => setOtp(value)} />
       <button
         onClick={onNext}
         className="bg-[#f46506] text-white p-3 rounded-full w-full"
@@ -238,7 +251,9 @@ function VerificationStep({ onNext, otp, setOtp, email }: VerificationStepProps)
         <a
           href="#"
           onClick={handleResendCode} // استدعاء دالة إعادة إرسال الكود عند الضغط
-          className={`text-gray-500 text-sm ${loading ? 'cursor-not-allowed' : ''}`}
+          className={`text-gray-500 text-sm ${
+            loading ? "cursor-not-allowed" : ""
+          }`}
         >
           {loading ? "Resending..." : "Resend Code"}
         </a>
@@ -261,8 +276,8 @@ function NewPasswordStep({
 
   const handleSubmit = async () => {
     try {
-      await onSubmit();
-      router.push("./"); 
+      onSubmit();
+      router.push("./");
     } catch (error) {
       console.error("Failed to reset password:", error);
     }

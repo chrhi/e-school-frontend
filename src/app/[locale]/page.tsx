@@ -8,6 +8,7 @@ import TestimonialSection from "@/components/testimonial-section";
 import FAQSection from "@/components/FAQSection";
 import Hero from "@/components/sections/hero";
 import { Users, Award, BookOpen, Play } from "lucide-react";
+import Categories from "@/components/categories";
 
 const StatCard = ({
   number,
@@ -137,6 +138,8 @@ export default async function Page() {
           </div>
         </div>
       </MaxWidthWrapper>
+
+      <Categories />
 
       {/* Features Section */}
       <MaxWidthWrapper className="mb-20">

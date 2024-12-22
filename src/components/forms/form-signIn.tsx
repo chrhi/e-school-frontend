@@ -77,7 +77,7 @@ const FormSignIn = () => {
 
   return (
     <div className="min-fit flex items-center justify-center p-4">
-      <div className="w-full max-w-md my-10 bg-white border rounded-2xl p-8">
+      <div className="w-full max-w-md my-10 bg-white shadow-xl border rounded-2xl p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
             Sign in to your Account

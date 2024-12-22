@@ -6,7 +6,7 @@ async function page() {
   return (
     <>
       <NavBar />
-      <div className="flex gap-2 bg-gray-100 h-screen pt-20  justify-center items-center">
+      <div className="flex gap-2  h-screen pt-20  justify-center items-center">
         <FormSignIn />
       </div>
 

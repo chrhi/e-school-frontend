@@ -9,11 +9,17 @@ import Link from "next/link";
 import { toast } from "sonner";
 
 const validationSchema = Yup.object({
-  name: Yup.string().min(4, "The minimum character count is 4").required("Full Name is required"),
-  email: Yup.string().email("Invalid email format").required("Email is required"),
-  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+  name: Yup.string()
+    .min(4, "The minimum character count is 4")
+    .required("Full Name is required"),
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), undefined], "Passwords must match")
+    .oneOf([Yup.ref("password"), undefined], "Passwords must match")
     .required("Confirm Password is required"),
 });
 
@@ -41,17 +47,20 @@ const FormSignUp: React.FC = () => {
       try {
         localStorage.setItem("userEmail", values.email);
 
-        const response = await fetch("https://elearning-api-alpha.vercel.app/api/v1/auth/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: values.name,
-            email: values.email,
-            password: values.password,
-          }),
-        });
+        const response = await fetch(
+          "https://elearning-api-alpha.vercel.app/api/v1/auth/signup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: values.name,
+              email: values.email,
+              password: values.password,
+            }),
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to create account");
@@ -67,7 +76,8 @@ const FormSignUp: React.FC = () => {
       } catch (err: unknown) {
         if (err instanceof Error) {
           const errorMessage =
-            err.message || "There was an issue creating the account. Please try again later.";
+            err.message ||
+            "There was an issue creating the account. Please try again later.";
 
           if (err.message === "Email already exists") {
             formik.setFieldError("email", "This email is already registered");
@@ -82,10 +92,12 @@ const FormSignUp: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md my-10 bg-white p-8 shadow-xl rounded-lg">
+    <div className="min-h-screen flex items-center justify-center  p-4 pt-10">
+      <div className="w-full max-w-md my-10 bg-white p-8  shadow-xl border rounded-2xl">
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Create Your Account</h1>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Create Your Account
+          </h1>
           <p className="mt-2 text-sm text-gray-600">
             Join thousands of users and start your journey with us today.
           </p>
@@ -93,7 +105,9 @@ const FormSignUp: React.FC = () => {
 
         <form className="space-y-6" onSubmit={formik.handleSubmit}>
           {formik.errors.general && (
-            <div className="text-red-500 text-sm mb-2">{formik.errors.general}</div>
+            <div className="text-red-500 text-sm mb-2">
+              {formik.errors.general}
+            </div>
           )}
 
           <div>
@@ -110,12 +124,17 @@ const FormSignUp: React.FC = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.name && formik.errors.name && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.name}</div>
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.name}
+              </div>
             )}
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700" htmlFor="email">
+            <label
+              className="text-sm font-medium text-gray-700"
+              htmlFor="email"
+            >
               Email Address
             </label>
             <Input
@@ -128,12 +147,17 @@ const FormSignUp: React.FC = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.email && formik.errors.email && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.email}
+              </div>
             )}
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700" htmlFor="password">
+            <label
+              className="text-sm font-medium text-gray-700"
+              htmlFor="password"
+            >
               Password
             </label>
             <PasswordInput
@@ -143,12 +167,17 @@ const FormSignUp: React.FC = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.password && formik.errors.password && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.password}</div>
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.password}
+              </div>
             )}
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700" htmlFor="confirmPassword">
+            <label
+              className="text-sm font-medium text-gray-700"
+              htmlFor="confirmPassword"
+            >
               Confirm Password
             </label>
             <PasswordInput
@@ -157,9 +186,12 @@ const FormSignUp: React.FC = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.confirmPassword}</div>
-            )}
+            {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword && (
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.confirmPassword}
+                </div>
+              )}
           </div>
 
           <button
@@ -171,7 +203,9 @@ const FormSignUp: React.FC = () => {
           </button>
 
           <div className="text-center mt-4">
-            <span className="text-sm text-gray-600">Already have an account? </span>
+            <span className="text-sm text-gray-600">
+              Already have an account?{" "}
+            </span>
             <Link
               href="./sign-in"
               className="text-[#f46506] hover:text-[#d55605] font-medium text-sm"

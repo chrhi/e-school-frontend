@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import CodeInput from "@/components/CodeInput";
 import { toast } from "sonner";
 
-
 interface ConfirmStepProps {
   onNext: () => void;
 }
@@ -48,7 +47,7 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ "otp": code, "email": email }),
+          body: JSON.stringify({ otp: code, email: email }),
         }
       );
 
@@ -67,11 +66,15 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
         }, 2000);
         onNext();
       } else {
-        setErrorMessage(data.message || "Invalid verification code. Please try again.");
+        setErrorMessage(
+          data.message || "Invalid verification code. Please try again."
+        );
       }
     } catch (error) {
       console.error("Error details:", error);
-      setErrorMessage("An error occurred during verification. Please try again.");
+      setErrorMessage(
+        "An error occurred during verification. Please try again."
+      );
     } finally {
       setIsVerifying(false);
     }
@@ -79,7 +82,7 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-white rounded-lg p-8 w-[454px] h-[600px] max-w-lg">
+      <div className="bg-white rounded-2xl p-8 shadow-xl border w-[454px] h-[600px] max-w-lg">
         <div className="flex flex-col items-center text-center gap-2 p-6 shadow-xl">
           <Image
             src="/Email-verify.svg"
@@ -88,17 +91,23 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
             width={112}
             height={112}
           />
-          <h2 className="text-4xl font-semibold text-gray-900 mb-4">Verify Your Email</h2>
+          <h2 className="text-4xl font-semibold text-gray-900 mb-4">
+            Verify Your Email
+          </h2>
           <p className="text-sm text-gray-600 mb-6">
             Please check your email: {email}
           </p>
 
           <CodeInput value={code} onChange={setCode} />
 
-          {errorMessage && <div className="text-red-500 mt-4">{errorMessage}</div>}
+          {errorMessage && (
+            <div className="text-red-500 mt-4">{errorMessage}</div>
+          )}
 
           {isVerified ? (
-            <div className="text-green-500 mt-4">Verification successful! Redirecting...</div>
+            <div className="text-green-500 mt-4">
+              Verification successful! Redirecting...
+            </div>
           ) : (
             <button
               onClick={handleVerification}
