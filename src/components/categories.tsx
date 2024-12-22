@@ -46,20 +46,21 @@ const Categories = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category) => (
-            <Card
-              key={category.title}
-              className="hover:shadow-lg transition-all duration-300 hover:scale-105 bg-white/10 border-[#f46506]/20"
-            >
-              <CardContent className="flex flex-col items-center text-center p-6">
-                <div className="mb-4 bg-white/10 p-4 rounded-full">
-                  {category.icon}
-                </div>
-                <h3 className="font-semibold text-xl mb-2 text-white">
-                  {category.title}
-                </h3>
-                <p className="text-gray-300 text-sm">{category.description}</p>
-              </CardContent>
-            </Card>
+            <a key={category.title} href="#courses-grid">
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 bg-white/10 border-[#f46506]/20">
+                <CardContent className="flex flex-col items-center text-center p-6">
+                  <div className="mb-4 bg-white/10 p-4 rounded-full">
+                    {category.icon}
+                  </div>
+                  <h3 className="font-semibold text-xl mb-2 text-white">
+                    {category.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm">
+                    {category.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </a>
           ))}
         </div>
       </MaxWidthWrapper>

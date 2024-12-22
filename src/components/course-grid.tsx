@@ -141,7 +141,7 @@ const CourseGrid = () => {
         );
 
   return (
-    <div className="bg-gray-50 min-h-screen py-8">
+    <section id="courses-grid" className="bg-gray-50 min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header Section */}
         <div className="flex items-center justify-between mb-8">
@@ -206,7 +206,7 @@ const CourseGrid = () => {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

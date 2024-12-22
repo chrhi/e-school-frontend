@@ -1,8 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useEffect } from "react";
 import MaxWidthWrapper from "@/components/max-with-wrapper";
-import { Menu, X, Bell, ChevronRight, Heart, ShoppingCart } from "lucide-react";
+import {
+  Menu,
+  X,
+  Bell,
+  ChevronRight,
+  Heart,
+  ShoppingCart,
+  ChevronDown,
+} from "lucide-react";
 import Link from "next/link";
 import { TUser } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,16 +27,29 @@ const navItems = [
   { name: "Contact", href: "/" },
 ];
 
+const languages = [
+  { code: "ar", name: "العربية", flag: "/Flag_of_Algeria.svg.png" },
+  { code: "en", name: "English", flag: "/Flag_of_the_United_Kingdom.svg.png" },
+];
+
 export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
   const [user, setUser] = useState<TUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState(languages[1]);
 
   const handleLogout = () => {
     logout();
     window.location.reload();
+  };
+
+  const handleLanguageChange = (language: any) => {
+    setSelectedLanguage(language);
+    setShowLanguageDropdown(false);
+    // Add your language change logic here
   };
 
   useEffect(() => {
@@ -50,29 +72,58 @@ export default function NavBar() {
       });
   }, []);
 
-  const AuthButtons = () => (
-    <>
-      <Button variant={"ghost"} size={"sm"}>
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (showLanguageDropdown && !event.target.closest(".language-dropdown")) {
+        setShowLanguageDropdown(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [showLanguageDropdown]);
+
+  const LanguageDropdown = () => (
+    <div className="relative language-dropdown">
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+        className="gap-2"
+      >
         <img
-          src="/Flag_of_Algeria.svg.png"
-          alt="Algeria Flag"
-          style={{ width: "10px", height: "10px", marginRight: "8px" }}
+          src={selectedLanguage.flag}
+          alt={`${selectedLanguage.name} Flag`}
+          className="w-4 h-4 object-contain"
         />
-        العربية
+        {selectedLanguage.name}
+        <ChevronDown
+          className={`w-4 h-4 transition-transform ${
+            showLanguageDropdown ? "rotate-180" : ""
+          }`}
+        />
       </Button>
-      <Link
-        href="/en/sign-in"
-        className="px-4 py-2 text-primary font-semibold hover:bg-orange-50 rounded-full transition-colors"
-      >
-        Login
-      </Link>
-      <Link
-        href="/en/sign-up"
-        className="px-4 py-2 bg-primary text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
-      >
-        Register Now
-      </Link>
-    </>
+
+      {showLanguageDropdown && (
+        <div className="absolute top-full right-0 mt-1 py-2 w-40 bg-white rounded-lg shadow-lg border z-50">
+          {languages.map((language) => (
+            <button
+              key={language.code}
+              onClick={() => handleLanguageChange(language)}
+              className="w-full px-4 py-2 text-left flex items-center gap-2 hover:bg-gray-50 transition-colors"
+            >
+              <img
+                src={language.flag}
+                alt={`${language.name} Flag`}
+                className="w-4 h-4 object-contain"
+              />
+              <span>{language.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 
   const ShoppingIcons = () => (
@@ -93,6 +144,24 @@ export default function NavBar() {
         </span>
       </button>
     </div>
+  );
+
+  const AuthButtons = () => (
+    <>
+      <LanguageDropdown />
+      <Link
+        href="/en/sign-in"
+        className="px-4 py-2 text-primary font-semibold hover:bg-orange-50 rounded-full transition-colors"
+      >
+        Login
+      </Link>
+      <Link
+        href="/en/sign-up"
+        className="px-4 py-2 bg-primary text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
+      >
+        Register Now
+      </Link>
+    </>
   );
 
   const LoadingSkeleton = () => (
@@ -167,18 +236,7 @@ export default function NavBar() {
                 <LoadingSkeleton />
               ) : user ? (
                 <>
-                  <Button variant={"ghost"} size={"sm"}>
-                    <img
-                      src="/Flag_of_Algeria.svg.png"
-                      alt="Algeria Flag"
-                      style={{
-                        width: "10px",
-                        height: "10px",
-                        marginRight: "8px",
-                      }}
-                    />
-                    العربية
-                  </Button>
+                  <LanguageDropdown />
                   <ShoppingIcons />
                   <UserDropdown
                     onLogout={handleLogout}
@@ -219,7 +277,8 @@ export default function NavBar() {
                     </div>
                   ) : user ? (
                     <>
-                      <div className="flex justify-between px-4 py-2">
+                      <div className="flex justify-between items-center px-4 py-2">
+                        <LanguageDropdown />
                         <ShoppingIcons />
                         <UserDropdown
                           onLogout={handleLogout}
@@ -229,6 +288,9 @@ export default function NavBar() {
                     </>
                   ) : (
                     <>
+                      <div className="px-4 py-2">
+                        <LanguageDropdown />
+                      </div>
                       <Link
                         href="/en/sign-in"
                         className="w-full px-4 py-2 text-center text-primary border border-primary font-semibold rounded-full hover:bg-orange-50 transition-colors"
