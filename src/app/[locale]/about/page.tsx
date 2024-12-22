@@ -14,10 +14,23 @@ import {
 } from "lucide-react";
 
 import Footer from "@/components/layout/footer";
+import NavBar from "@/components/layout/nav-bar";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
+};
+
+const floatingAnimation = {
+  initial: { y: 0 },
+  animate: {
+    y: [-10, 10, -10],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
 };
 
 export default function AboutUs() {
@@ -65,12 +78,79 @@ export default function AboutUs() {
 
   return (
     <>
+      <NavBar />
       <div className="w-full mb-20 mt-[70px] bg-white">
-        <div className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-[#FFF3E4] via-white to-[#F5F7FF] overflow-hidden">
+        <div className="relative min-h-[80vh] flex items-center bg-gradient-to-br from-[#FFF3E4] via-white to-[#F5F7FF] overflow-hidden">
+          {/* Background decorative elements */}
           <div className="absolute inset-0 opacity-30">
             <div className="absolute w-96 h-96 -top-48 -left-48 bg-[#f46506] rounded-full blur-3xl" />
             <div className="absolute w-96 h-96 -bottom-48 -right-48 bg-[#2F327D] rounded-full blur-3xl" />
           </div>
+
+          {/* Floating images */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            initial="hidden"
+            animate="visible"
+          >
+            {/* Graduation cap image */}
+            <motion.div
+              variants={floatingAnimation}
+              initial="initial"
+              animate="animate"
+              className="absolute top-20 right-[15%] w-24 h-24"
+            >
+              <img
+                src="/classroom.png"
+                alt="Graduation"
+                className="w-full h-full object-cover rounded-lg shadow-lg"
+              />
+            </motion.div>
+
+            {/* Students image */}
+            <motion.div
+              variants={floatingAnimation}
+              initial="initial"
+              animate="animate"
+              className="absolute bottom-32 left-[10%] w-32 h-32"
+            >
+              <img
+                src="/girl.png"
+                alt="Students"
+                className="w-full h-full object-cover rounded-lg shadow-lg"
+              />
+            </motion.div>
+
+            {/* Campus image */}
+            <motion.div
+              variants={floatingAnimation}
+              initial="initial"
+              animate="animate"
+              className="absolute top-40 left-[20%] w-28 h-28"
+            >
+              <img
+                src="/laptop.png"
+                alt="Campus"
+                className="w-full h-full object-cover rounded-lg shadow-lg"
+              />
+            </motion.div>
+
+            {/* Achievement image */}
+            <motion.div
+              variants={floatingAnimation}
+              initial="initial"
+              animate="animate"
+              className="absolute bottom-40 right-[20%] w-20 h-20"
+            >
+              <img
+                src="/laptop.png"
+                alt="Achievement"
+                className="w-full h-full object-cover rounded-lg shadow-lg"
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Main content */}
           <MaxWidthWrapper className="relative z-10">
             <motion.div
               initial="hidden"
@@ -82,7 +162,7 @@ export default function AboutUs() {
             >
               <motion.div
                 variants={fadeIn}
-                className="inline-block mb-6 px-6 py-2 bg-white/80 backdrop-blur-sm rounded-full"
+                className="inline-block mb-6 px-6 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-md"
               >
                 <span className="text-[#f46506] font-semibold">
                   Established 1998
@@ -90,17 +170,25 @@ export default function AboutUs() {
               </motion.div>
               <motion.h1
                 variants={fadeIn}
-                className="text-5xl md:text-7xl font-bold text-[#2F327D] mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#2F327D] to-[#f46506]"
+                className="text-5xl md:text-7xl font-bold text-black"
               >
                 About Our School
               </motion.h1>
               <motion.p
                 variants={fadeIn}
-                className="text-gray-600 max-w-2xl mx-auto text-xl leading-relaxed"
+                className="text-gray-600 max-w-2xl mx-auto text-xl leading-relaxed mb-8"
               >
                 Empowering minds and shaping futures through innovative
                 education and personalized learning experiences.
               </motion.p>
+              <motion.button
+                variants={fadeIn}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-[#2F327D] text-white rounded-full shadow-lg hover:bg-[#373b8a] transition-colors duration-300"
+              >
+                Discover More
+              </motion.button>
             </motion.div>
           </MaxWidthWrapper>
         </div>

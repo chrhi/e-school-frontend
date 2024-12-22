@@ -50,14 +50,14 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="w-full  min-h-screen h-fit">{children}</div>
 
-          <Toaster />
+          <Toaster position="top-center" />
         </NextIntlClientProvider>
       </body>
-      {/* 
+
       <script
         src="//code.tidio.co/f4ntqdkrkcmkov2pbgapiuevig4fhtbq.js"
         async
-      ></script> */}
+      ></script>
     </html>
   );
 }

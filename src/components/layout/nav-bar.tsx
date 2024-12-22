@@ -12,7 +12,7 @@ import UserDropdown from "../user-nav";
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Courses", href: "/" },
+  { name: "Courses", href: "/en/courses" },
   { name: "About", href: "/en/about" },
   { name: "Contact", href: "/" },
 ];
