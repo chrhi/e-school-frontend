@@ -30,6 +30,7 @@ const navItems = [
 const languages = [
   { code: "ar", name: "العربية", flag: "/Flag_of_Algeria.svg.png" },
   { code: "en", name: "English", flag: "/Flag_of_the_United_Kingdom.svg.png" },
+  { code: "fr", name: "français", flag: "/Flag_of_France.png" },
 ];
 
 export default function NavBar() {
