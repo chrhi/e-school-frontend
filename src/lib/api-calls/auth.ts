@@ -3,7 +3,6 @@ export async function getCurrentUser() {
     "https://elearning-api-alpha.vercel.app/api/v1/auth/isAuthenticated";
 
   try {
-    // Get JWT token from browser cookies
     const token = document.cookie
       .split("; ")
       .find((row) => row.startsWith("jwt="))

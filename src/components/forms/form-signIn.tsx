@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { login } from "@/lib/api-calls/login";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+import { PasswordInput } from "../PasswordInput";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -25,8 +27,12 @@ const formSchema = z.object({
   rememberMe: z.boolean().default(false),
 });
 
+type FormValues = z.infer<typeof formSchema>;
+
 const FormSignIn = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
@@ -35,15 +41,15 @@ const FormSignIn = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: FormValues) {
+    try {
+      setIsLoading(true);
+      const res = await login({
+        email: values.email,
+        password: values.password,
+      });
 
-    console.log("the logging function is running...");
-    const res = await login({ email: values.email, password: values.password });
-
-    if (res) {
       if (!res?.sucess) {
-        console.log(res?.message);
         toast.error(res?.message, {
           style: { background: "#fee2e2", color: "#dc2626" },
           className: "border-red-500",
@@ -57,12 +63,21 @@ const FormSignIn = () => {
       });
 
       window.location.reload();
+    } catch (err) {
+      toast.error("An error occurred while signing in", {
+        style: { background: "#fee2e2", color: "#dc2626" },
+        className: "border-red-500",
+      });
+
+      console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md my-10 bg-white p-8">
+    <div className="min-fit flex items-center justify-center p-4">
+      <div className="w-full max-w-md my-10 bg-white border rounded-2xl p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
             Sign in to your Account
@@ -86,6 +101,7 @@ const FormSignIn = () => {
                     <Input
                       placeholder="you@example.com"
                       className="w-full"
+                      disabled={isLoading}
                       {...field}
                     />
                   </FormControl>
@@ -103,9 +119,9 @@ const FormSignIn = () => {
                     Password
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
+                    <PasswordInput
                       placeholder="Enter your password"
+                      disabled={isLoading}
                       {...field}
                     />
                   </FormControl>
@@ -124,6 +140,7 @@ const FormSignIn = () => {
                       id="rememberMe"
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      disabled={isLoading}
                     />
                     <label
                       htmlFor="rememberMe"
@@ -144,9 +161,17 @@ const FormSignIn = () => {
 
             <Button
               type="submit"
+              disabled={isLoading}
               className="w-full bg-orange-500 hover:bg-orange-600 text-white py-6 rounded-full"
             >
-              Login
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                "Login"
+              )}
             </Button>
 
             <div className="text-center mt-6">
