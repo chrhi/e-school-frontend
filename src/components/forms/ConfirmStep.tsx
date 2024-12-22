@@ -52,22 +52,28 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
       );
 
       const data = await response.json();
-
       console.log("Response Data:", data);
 
       if (data.success) {
         setIsVerified(true);
-        toast.success("Your account is created ", {
+        toast.success("Your account is successfully verified!", {
           style: { background: "#dcfce7", color: "#16a34a" },
           className: "border-green-500",
         });
         setTimeout(() => {
-          router.push("/sign-in");
+          router.push("./sign-in");
         }, 2000);
         onNext();
       } else {
         setErrorMessage(
           data.message || "Invalid verification code. Please try again."
+        );
+        toast.error(
+          data.message || "Invalid verification code. Please try again.",
+          {
+            style: { background: "#fce4e4", color: "#9b1c1c" },
+            className: "border-red-500",
+          }
         );
       }
     } catch (error) {
@@ -75,6 +81,10 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
       setErrorMessage(
         "An error occurred during verification. Please try again."
       );
+      toast.error("An error occurred during verification. Please try again.", {
+        style: { background: "#fce4e4", color: "#9b1c1c" },
+        className: "border-red-500",
+      });
     } finally {
       setIsVerifying(false);
     }
@@ -83,7 +93,7 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white rounded-2xl p-8 shadow-xl border w-[454px] h-[600px] max-w-lg">
-        <div className="flex flex-col items-center text-center gap-2 p-6 shadow-xl">
+        <div className="flex flex-col items-center text-center gap-2 p-6 ">
           <Image
             src="/Email-verify.svg"
             alt="Email Icon"
@@ -100,9 +110,12 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
 
           <CodeInput value={code} onChange={setCode} />
 
-          {errorMessage && (
-            <div className="text-red-500 mt-4">{errorMessage}</div>
-          )}
+          {isVerified
+            ? null
+            : errorMessage &&
+              errorMessage.includes("Invalid OTP or OTP expired") && (
+                <div className="text-red-500 mt-4">{errorMessage}</div>
+              )}
 
           {isVerified ? (
             <div className="text-green-500 mt-4">
@@ -117,6 +130,7 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
               {isVerifying ? "Verifying..." : "Verify"}
             </button>
           )}
+
           <a href="./" className="text-gray-500 text-sm mt-4">
             back to register
           </a>

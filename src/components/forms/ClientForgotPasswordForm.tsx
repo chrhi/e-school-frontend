@@ -6,13 +6,14 @@ import CodeInput from "@/components/CodeInput";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+
 interface ForgotPasswordPayload {
   email: string;
 }
 
 interface ResetPasswordPayload {
   email: string;
-  otp: string;
+ 
   password: string;
   passwordConfirm: string;
 }
@@ -78,10 +79,9 @@ export function ClientForgotPasswordForm() {
 
   const handleResetPassword = async () => {
     const payload: ResetPasswordPayload = {
-      email: "email",
-      otp: "email",
-      password: "password",
-      passwordConfirm: "passwordConfirm",
+      email: email,
+      password: password,
+      passwordConfirm: passwordConfirm,
     };
 
     try {
@@ -101,7 +101,7 @@ export function ClientForgotPasswordForm() {
         console.error("Failed to reset password:", errorResponse);
         throw new Error("Failed to reset password.");
       }
-      toast.success("The password is update", {
+      toast.success("The password is updated", {
         style: { background: "#dcfce7", color: "#16a34a" },
         className: "border-green-500",
       });
@@ -196,7 +196,7 @@ function VerificationStep({
   setOtp,
   email,
 }: VerificationStepProps) {
-  const [loading, setLoading] = useState(false); // لإدارة حالة التحميل أثناء إعادة إرسال الكود
+  const [loading, setLoading] = useState(false); 
 
   const handleResendCode = async () => {
     setLoading(true);
@@ -227,6 +227,31 @@ function VerificationStep({
     }
   };
 
+  const handleVerifyOtp = async () => {
+    try {
+      const response = await fetch(
+        "https://elearning-api-alpha.vercel.app/api/v1/auth/verify-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ "otp":otp, "email":email}),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Verification failed. Please check the OTP.");
+      }
+
+      toast.success("OTP verified successfully.");
+      onNext();
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      alert("Failed to verify OTP. Please try again.");
+    }
+  };
+
   return (
     <div className="text-center flex flex-col gap-6">
       <Image
@@ -242,7 +267,7 @@ function VerificationStep({
       </p>
       <CodeInput value={otp} onChange={(value) => setOtp(value)} />
       <button
-        onClick={onNext}
+        onClick={handleVerifyOtp}
         className="bg-[#f46506] text-white p-3 rounded-full w-full"
       >
         Verify
@@ -284,7 +309,7 @@ function NewPasswordStep({
   };
 
   return (
-    <div className="text-center flex flex-col gap-4">
+    <div className="text-center flex flex-col gap-4 ">
       <Image
         src="/lock-icon.svg"
         alt="Lock Icon"
