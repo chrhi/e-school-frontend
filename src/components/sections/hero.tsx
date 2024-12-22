@@ -32,9 +32,9 @@ const scaleIn = {
 
 export default function Hero() {
   return (
-    <div className="w-full relative min-h-screen bg-gradient-to-br from-[#FFF3E4] to-[#FFE8D2]">
+    <div className="w-full relative min-h-screen bg-gradient-to-br from-[#FFF3E4] to-[#FFE8D2] overflow-hidden">
       <MaxWidthWrapper>
-        <div className="w-full  grid grid-cols-1 lg:grid-cols-2 gap-8 pt-16 md:pt-24 pb-16">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 pt-16 md:pt-24 pb-16">
           <motion.div
             className="w-full flex flex-col mt-20 md:mt-0 justify-center gap-y-6"
             initial="hidden"
@@ -49,6 +49,7 @@ export default function Hero() {
               },
             }}
           >
+            {/* Text content remains the same */}
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
               variants={fadeIn}
@@ -65,8 +66,8 @@ export default function Hero() {
               className="text-base md:text-lg text-gray-600 max-w-xl"
               variants={fadeIn}
             >
-              Our school is an interesting platform that will teach you in more
-              an interactive way
+              Our school is an interesting platform that will teach you <br />{" "}
+              in more an interactive way
             </motion.p>
 
             <motion.div
@@ -111,7 +112,7 @@ export default function Hero() {
             animate="visible"
             variants={scaleIn}
           >
-            <div className="relative">
+            <div className="relative flex items-center justify-center gap-4">
               <motion.img
                 src="/girl.png"
                 className="h-[450px] lg:h-[600px] object-contain relative z-10"
@@ -121,7 +122,25 @@ export default function Hero() {
                 initial="initial"
                 animate="animate"
               />
+              <motion.img
+                src="/boy.png"
+                className="h-[300px] lg:h-[450px] object-contain relative z-10 -ml-8"
+                alt="Student learning online"
+                loading="eager"
+                variants={floatingAnimation}
+                initial="initial"
+                animate={{
+                  y: [-10, 10, -10],
+                  transition: {
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5, // Adding a slight delay to create an alternating effect
+                  },
+                }}
+              />
 
+              {/* Floating cards remain the same */}
               <motion.div
                 className="absolute top-20 -left-4 md:-left-10 bg-white p-4 rounded-xl shadow-lg z-20"
                 initial={{ x: -100, opacity: 0 }}

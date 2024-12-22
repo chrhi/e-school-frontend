@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { logout } from "@/lib/api-calls/login";
 import { getCurrentUser } from "@/lib/api-calls/auth";
 import UserDropdown from "../user-nav";
+import { Button } from "../ui/button";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -51,6 +52,14 @@ export default function NavBar() {
 
   const AuthButtons = () => (
     <>
+      <Button variant={"ghost"} size={"sm"}>
+        <img
+          src="/Flag_of_Algeria.svg.png"
+          alt="Algeria Flag"
+          style={{ width: "10px", height: "10px", marginRight: "8px" }}
+        />
+        العربية
+      </Button>
       <Link
         href="/en/sign-in"
         className="px-4 py-2 text-primary font-semibold hover:bg-orange-50 rounded-full transition-colors"
@@ -158,6 +167,18 @@ export default function NavBar() {
                 <LoadingSkeleton />
               ) : user ? (
                 <>
+                  <Button variant={"ghost"} size={"sm"}>
+                    <img
+                      src="/Flag_of_Algeria.svg.png"
+                      alt="Algeria Flag"
+                      style={{
+                        width: "10px",
+                        height: "10px",
+                        marginRight: "8px",
+                      }}
+                    />
+                    العربية
+                  </Button>
                   <ShoppingIcons />
                   <UserDropdown
                     onLogout={handleLogout}
