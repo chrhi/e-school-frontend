@@ -7,7 +7,7 @@ export async function login({
   email: string;
   password: string;
 }) {
-  const url = "https://elearning-api-alpha.vercel.app/api/v1/auth/login";
+  const url = "http://api.craftednext.com/api/v1/auth/login";
   const credentials = {
     email,
     password,

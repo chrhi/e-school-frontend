@@ -1,6 +1,5 @@
 export async function getCurrentUser() {
-  const url =
-    "https://elearning-api-alpha.vercel.app/api/v1/auth/isAuthenticated";
+  const url = "http://api.craftednext.com/api/v1/auth/isAuthenticated";
 
   try {
     const token = document.cookie

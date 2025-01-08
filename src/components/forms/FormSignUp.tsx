@@ -46,9 +46,9 @@ const FormSignUp: React.FC = () => {
     onSubmit: async (values) => {
       try {
         localStorage.setItem("userEmail", values.email);
-    
+
         const response = await fetch(
-          "https://elearning-api-alpha.vercel.app/api/v1/auth/signup",
+          "http://api.craftednext.com/api/v1/auth/signup",
           {
             method: "POST",
             headers: {
@@ -61,36 +61,33 @@ const FormSignUp: React.FC = () => {
             }),
           }
         );
-    
-        
+
         if (!response.ok) {
-          const data = await response.json(); 
+          const data = await response.json();
           throw new Error(data.message || "Failed to create account");
         }
-    
-       
+
         toast.success("Check your email, please, verify OTP.", {
           style: { background: "#dcfce7", color: "#16a34a" },
           className: "border-green-500",
         });
-    
+
         const data = await response.json();
         console.log("Account created:", data);
-    
+
         router.push("././sign-up/confirme-account");
       } catch (err: unknown) {
         if (err instanceof Error) {
           const errorMessage =
-            err.message || "There was an issue creating the account. Please try again later.";
-    
-        
+            err.message ||
+            "There was an issue creating the account. Please try again later.";
+
           if (err.message.includes("Email already exists")) {
             toast.error("This email is already registered", {
               style: { background: "#fce4e4", color: "#9b1c1c" },
               className: "border-red-500",
             });
           } else {
-            
             toast.error(errorMessage, {
               style: { background: "#fce4e4", color: "#9b1c1c" },
               className: "border-red-500",
@@ -104,7 +101,6 @@ const FormSignUp: React.FC = () => {
         }
       }
     },
-    
   });
 
   return (
@@ -147,7 +143,10 @@ const FormSignUp: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700" htmlFor="email">
+            <label
+              className="text-sm font-medium text-gray-700"
+              htmlFor="email"
+            >
               Email Address
             </label>
             <Input
@@ -162,7 +161,10 @@ const FormSignUp: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700" htmlFor="password">
+            <label
+              className="text-sm font-medium text-gray-700"
+              htmlFor="password"
+            >
               Password
             </label>
             <PasswordInput
@@ -179,7 +181,10 @@ const FormSignUp: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700" htmlFor="confirmPassword">
+            <label
+              className="text-sm font-medium text-gray-700"
+              htmlFor="confirmPassword"
+            >
               Confirm Password
             </label>
             <PasswordInput
@@ -188,11 +193,12 @@ const FormSignUp: React.FC = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-              <div className="text-red-500 text-sm mt-1">
-                {formik.errors.confirmPassword}
-              </div>
-            )}
+            {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword && (
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.confirmPassword}
+                </div>
+              )}
           </div>
 
           <button

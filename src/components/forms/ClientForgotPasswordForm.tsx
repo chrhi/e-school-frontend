@@ -13,7 +13,7 @@ interface ForgotPasswordPayload {
 
 interface ResetPasswordPayload {
   email: string;
- 
+
   password: string;
   passwordConfirm: string;
 }
@@ -53,7 +53,7 @@ export function ClientForgotPasswordForm() {
 
     try {
       const response = await fetch(
-        "https://elearning-api-alpha.vercel.app/api/v1/auth/forgot-password",
+        "http://api.craftednext.com/api/v1/auth/forgot-password",
         {
           method: "POST",
           headers: {
@@ -86,7 +86,7 @@ export function ClientForgotPasswordForm() {
 
     try {
       const response = await fetch(
-        "https://elearning-api-alpha.vercel.app/api/v1/auth/reset-password",
+        "http://api.craftednext.com/api/v1/auth/reset-password",
         {
           method: "PATCH",
           headers: {
@@ -196,7 +196,7 @@ function VerificationStep({
   setOtp,
   email,
 }: VerificationStepProps) {
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const handleResendCode = async () => {
     setLoading(true);
@@ -204,7 +204,7 @@ function VerificationStep({
 
     try {
       const response = await fetch(
-        "https://elearning-api-alpha.vercel.app/api/v1/auth/forgot-password",
+        "http://api.craftednext.com/api/v1/auth/forgot-password",
         {
           method: "POST",
           headers: {
@@ -230,13 +230,13 @@ function VerificationStep({
   const handleVerifyOtp = async () => {
     try {
       const response = await fetch(
-        "https://elearning-api-alpha.vercel.app/api/v1/auth/verify-email",
+        "http://api.craftednext.com/api/v1/auth/verify-email",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ "otp":otp, "email":email}),
+          body: JSON.stringify({ otp: otp, email: email }),
         }
       );
 

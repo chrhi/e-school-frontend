@@ -41,7 +41,7 @@ const ConfirmStep: React.FC<ConfirmStepProps> = ({ onNext }) => {
 
     try {
       const response = await fetch(
-        `https://elearning-api-alpha.vercel.app/api/v1/auth/verify-email`,
+        `http://api.craftednext.com/api/v1/auth/verify-email`,
         {
           method: "POST",
           headers: {
