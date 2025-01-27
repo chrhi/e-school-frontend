@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 
 const handleI18nAndAuth = async (request: NextRequest) => {
   const i18nMiddleware = createMiddleware({
-    locales: ["en", "ar"],
+    locales: ["en", "ar", "fr"],
     defaultLocale: "en",
   });
 

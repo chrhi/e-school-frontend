@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -19,18 +18,19 @@ import { logout } from "@/lib/api-calls/login";
 import { getCurrentUser } from "@/lib/api-calls/auth";
 import UserDropdown from "../user-nav";
 import { Button } from "../ui/button";
-
-const navItems = [
-  { name: "Home", href: "/" },
-  { name: "Courses", href: "/en/courses" },
-  { name: "About", href: "/en/about" },
-  { name: "Contact", href: "/" },
-];
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
 
 const languages = [
-  { code: "ar", name: "العربية", flag: "/Flag_of_Algeria.svg.png" },
-  { code: "en", name: "English", flag: "/Flag_of_the_United_Kingdom.svg.png" },
-  { code: "fr", name: "français", flag: "/Flag_of_France.png" },
+  { code: "ar", name: "العربية", flag: "/Flag_of_Algeria.svg.png", dir: "rtl" },
+  {
+    code: "en",
+    name: "English",
+    flag: "/Flag_of_the_United_Kingdom.svg.png",
+    dir: "ltr",
+  },
+  { code: "fr", name: "français", flag: "/Flag_of_France.png", dir: "ltr" },
 ];
 
 export default function NavBar() {
@@ -40,18 +40,55 @@ export default function NavBar() {
   const [user, setUser] = useState<TUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[1]);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const t = useTranslations();
+  const currentLocale = useLocale();
+
+  // Get current language based on locale
+  const getCurrentLanguage = () => {
+    return (
+      languages.find((lang) => lang.code === currentLocale) || languages[1]
+    ); // Default to English
+  };
+
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    getCurrentLanguage()
+  );
+
+  const navItems = [
+    { name: "nav.home", href: "/" },
+    { name: "nav.about", href: "/courses" },
+    { name: "nav.product", href: "/about" },
+    { name: "nav.contact", href: "/" },
+  ];
 
   const handleLogout = () => {
     logout();
     window.location.reload();
   };
 
-  const handleLanguageChange = (language: any) => {
+  const handleLanguageChange = (language: (typeof languages)[0]) => {
     setSelectedLanguage(language);
     setShowLanguageDropdown(false);
-    // Add your language change logic here
+
+    // Get the path without the locale
+    const pathWithoutLocale = pathname.replace(`/${currentLocale}`, "");
+    const newPath = `/${language.code}${pathWithoutLocale || ""}`;
+
+    router.push(newPath);
+    // Update document direction for RTL/LTR support
+    document.documentElement.dir = language.dir;
   };
+
+  useEffect(() => {
+    // Set initial direction based on current locale
+    const currentLang = languages.find((lang) => lang.code === currentLocale);
+    if (currentLang) {
+      document.documentElement.dir = currentLang.dir;
+    }
+  }, [currentLocale]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,7 +102,6 @@ export default function NavBar() {
   useEffect(() => {
     getCurrentUser()
       .then((user) => {
-        console.log(user);
         setUser(user);
       })
       .finally(() => {
@@ -73,10 +109,10 @@ export default function NavBar() {
       });
   }, []);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (showLanguageDropdown && !event.target.closest(".language-dropdown")) {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (showLanguageDropdown && !target.closest(".language-dropdown")) {
         setShowLanguageDropdown(false);
       }
     };
@@ -151,16 +187,16 @@ export default function NavBar() {
     <>
       <LanguageDropdown />
       <Link
-        href="/en/sign-in"
+        href={`/${currentLocale}/sign-in`}
         className="px-4 py-2 text-primary font-semibold hover:bg-orange-50 rounded-full transition-colors"
       >
-        Login
+        {t("nav.signin")}
       </Link>
       <Link
-        href="/en/sign-up"
+        href={`/${currentLocale}/sign-up`}
         className="px-4 py-2 bg-primary text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
       >
-        Register Now
+        {t("nav.signup")}
       </Link>
     </>
   );
@@ -213,7 +249,10 @@ export default function NavBar() {
         <MaxWidthWrapper>
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-12">
-              <Link href="/" className="flex items-center gap-2">
+              <Link
+                href={`/${currentLocale}`}
+                className="flex items-center gap-2"
+              >
                 <span className="text-2xl font-bold text-primary">
                   Rami school
                 </span>
@@ -223,10 +262,10 @@ export default function NavBar() {
                 {navItems.map((item) => (
                   <Link
                     key={item.name}
-                    href={item.href}
+                    href={`/${currentLocale}${item.href}`}
                     className="text-gray-600 hover:text-primary font-medium transition-colors"
                   >
-                    {item.name}
+                    {t(item.name)}
                   </Link>
                 ))}
               </nav>
@@ -265,10 +304,10 @@ export default function NavBar() {
                 {navItems.map((item) => (
                   <Link
                     key={item.name}
-                    href={item.href}
+                    href={`/${currentLocale}${item.href}`}
                     className="block px-4 py-2 text-gray-600 hover:bg-orange-50 hover:text-primary rounded-lg transition-colors"
                   >
-                    {item.name}
+                    {t(item.name)}
                   </Link>
                 ))}
                 <div className="grid gap-2 px-4 pt-4 border-t">
@@ -293,16 +332,16 @@ export default function NavBar() {
                         <LanguageDropdown />
                       </div>
                       <Link
-                        href="/en/sign-in"
+                        href={`/${currentLocale}/sign-in`}
                         className="w-full px-4 py-2 text-center text-primary border border-primary font-semibold rounded-full hover:bg-orange-50 transition-colors"
                       >
-                        Login
+                        {t("nav.signin")}
                       </Link>
                       <Link
-                        href="/en/sign-up"
+                        href={`/${currentLocale}/sign-up`}
                         className="w-full px-4 py-2 text-center bg-gradient-to-r from-primary to-pink-500 text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
                       >
-                        Register Now
+                        {t("nav.signup")}
                       </Link>
                     </>
                   )}

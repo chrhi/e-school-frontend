@@ -1,9 +1,8 @@
-import withNextIntl from "next-intl/plugin";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: "standalone",
-};
+const nextConfig = {};
 
-//@ts-expect-error it is a string anyway
-module.exports = withNextIntl("./i18n.ts")(nextConfig);
+module.exports = withNextIntl(nextConfig);

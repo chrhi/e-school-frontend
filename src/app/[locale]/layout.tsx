@@ -5,14 +5,21 @@ import { Poppins } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
 
+import { Cairo } from "next/font/google"; // Import Cairo for Arabic
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "300", "400", "500", "600"],
   variable: "--font-poppins",
 });
 
+const cairo = Cairo({
+  subsets: ["arabic"],
+  weight: ["200", "300", "400", "600", "700"],
+});
+
 export function generateStaticParams() {
-  return [{ locale: "en" }];
+  return [{ locale: "en" }, { locale: "ar" }];
 }
 
 async function getMessages(locale: string) {
@@ -34,7 +41,7 @@ export default async function RootLayout({
 }) {
   const { locale } = await params;
 
-  if (locale !== "en") {
+  if (locale !== "en" && locale !== "ar") {
     notFound();
   }
 
@@ -42,10 +49,10 @@ export default async function RootLayout({
 
   const messages = await getMessages(locale);
 
-  const fontClass = poppins.className;
+  const fontClass = locale === "ar" ? cairo.className : poppins.className;
 
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={fontClass}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="w-full  min-h-screen h-fit">{children}</div>
