@@ -16,6 +16,45 @@
     "button": "join now",
     "button2": "watch how it works"
   },
+  "status": {
+    "title": "Our Success Story",
+    "desc": "Join thousands of students achieving their academic goals through our comprehensive educational platform. Experience excellence in learning with our proven track record.",
+    "card1": {
+      "title": "Years Experience",
+      "value": "16"
+    },
+    "card2": {
+      "title": "Expert Instructors",
+      "value": "26"
+    },
+    "card3": {
+      "title": "Success Rate",
+      "value": "75%"
+    },
+    "card4": {
+      "title": "Active Students",
+      "value": "5K+"
+    }
+  },
+  "categories": {
+    "title": "Categories",
+    "card1": {
+      "title": "Support lessons",
+      "desc": "Get help with specific topics and challenges"
+    },
+    "card2": {
+      "title": "Training courses",
+      "desc": "Structured learning paths for comprehensive education"
+    },
+    "card3": {
+      "title": "Consultations",
+      "desc": "One-on-one expert guidance and advice"
+    },
+    "card4": {
+      "title": "Sales",
+      "desc": "Products and services to support your growth"
+    }
+  },
   "services": {
     "sectionTitle": "Our Services",
     "sectionDescription": "We specialize in delivering innovative software solutions tailored for startups and enterprises alike.",

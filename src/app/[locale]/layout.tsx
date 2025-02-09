@@ -4,7 +4,6 @@ import { setRequestLocale } from "next-intl/server";
 import { Poppins } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
-
 import { Cairo } from "next/font/google";
 
 const poppins = Poppins({

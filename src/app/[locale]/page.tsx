@@ -7,28 +7,9 @@ import CourseGrid from "@/components/course-grid";
 import TestimonialSection from "@/components/testimonial-section";
 import FAQSection from "@/components/FAQSection";
 import Hero from "@/components/sections/hero";
-import { Users, Award, BookOpen, Play } from "lucide-react";
 import Categories from "@/components/categories";
-
-const StatCard = ({
-  number,
-  label,
-  icon: Icon,
-}: {
-  number: string;
-  label: string;
-  icon: any;
-}) => (
-  <div className="group w-full md:w-[280px] p-8 bg-white rounded-2xl border shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
-    <div className="flex flex-col items-center gap-4">
-      <Icon className="w-12 h-12 text-[#f46506] group-hover:scale-110 transition-transform duration-300" />
-      <p className="text-6xl md:text-7xl font-bold text-[#f46506] text-center animate-fade-in">
-        {number}
-      </p>
-      <p className="text-gray-800 text-xl text-center font-semibold">{label}</p>
-    </div>
-  </div>
-);
+import { Award, BookOpen, Play, Users } from "lucide-react";
+import StatusSection from "@/components/sections/status-section";
 
 const FeatureCard = ({
   color,
@@ -57,7 +38,7 @@ const FeatureCard = ({
         {description}
       </p>
 
-      <button className="mt-4 px-6 py-2 bg-[#f46506] text-white rounded-full font-medium hover:bg-[#e07e05] transition-colors duration-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <button className="mt-4 px-6 py-2 bg-[#f46506] text-white rounded-full font-medium hover:bg-[#e07e05] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         Learn More
       </button>
     </div>
@@ -115,29 +96,7 @@ export default async function Page() {
       <Hero />
 
       {/* Stats Section */}
-      <MaxWidthWrapper className="mb-20">
-        <div className="w-full h-fit gap-y-12 flex flex-col items-center">
-          <div className="flex w-full items-center flex-col gap-y-6 mx-auto my-12 px-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-center">
-              <span className="bg-gradient-to-r from-[#2F327D] to-[#f46506] bg-clip-text text-transparent">
-                Our Success Story
-              </span>
-            </h2>
-            <p className="text-gray-600 text-xl text-center max-w-3xl leading-relaxed">
-              Join thousands of students achieving their academic goals through
-              our comprehensive educational platform. Experience excellence in
-              learning with our proven track record.
-            </p>
-          </div>
-
-          <div className="w-full h-fit flex flex-wrap items-center justify-center gap-8 px-4">
-            <StatCard number="5K+" label="Active Students" icon={Users} />
-            <StatCard number="75%" label="Success Rate" icon={Award} />
-            <StatCard number="26" label="Expert Instructors" icon={BookOpen} />
-            <StatCard number="16" label="Years Experience" icon={Award} />
-          </div>
-        </div>
-      </MaxWidthWrapper>
+      <StatusSection />
 
       <Categories />
 
