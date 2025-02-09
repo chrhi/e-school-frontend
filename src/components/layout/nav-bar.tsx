@@ -46,11 +46,11 @@ export default function NavBar() {
   const t = useTranslations();
   const currentLocale = useLocale();
 
-  // Get current language based on locale
+
   const getCurrentLanguage = () => {
     return (
       languages.find((lang) => lang.code === currentLocale) || languages[1]
-    ); // Default to English
+    );
   };
 
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -73,17 +73,16 @@ export default function NavBar() {
     setSelectedLanguage(language);
     setShowLanguageDropdown(false);
 
-    // Get the path without the locale
+
     const pathWithoutLocale = pathname.replace(`/${currentLocale}`, "");
     const newPath = `/${language.code}${pathWithoutLocale || ""}`;
 
     router.push(newPath);
-    // Update document direction for RTL/LTR support
-    document.documentElement.dir = language.dir;
+
   };
 
   useEffect(() => {
-    // Set initial direction based on current locale
+  
     const currentLang = languages.find((lang) => lang.code === currentLocale);
     if (currentLang) {
       document.documentElement.dir = currentLang.dir;
@@ -263,7 +262,7 @@ export default function NavBar() {
                   <Link
                     key={item.name}
                     href={`/${currentLocale}${item.href}`}
-                    className="text-gray-600 hover:text-primary font-medium transition-colors"
+                    className="text-gray-600 hover:text-primary font-bold transition-colors"
                   >
                     {t(item.name)}
                   </Link>

@@ -9,7 +9,9 @@
   },
 
   "hero": {
-    "headline": "Studying Online is now much easier",
+    "headline1": "studying",
+    "headline2": "online ",
+    "headline3": "is much easier",
     "desc": " Our school is an interesting platform that will teach you in more an interactive way",
     "button": "join now",
     "button2": "watch how it works"

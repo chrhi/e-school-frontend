@@ -3,6 +3,7 @@
 import { Play } from "lucide-react";
 import MaxWidthWrapper from "../max-with-wrapper";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -31,12 +32,14 @@ const scaleIn = {
 };
 
 export default function Hero() {
+  const t = useTranslations();
+
   return (
     <div className="w-full relative min-h-screen bg-gradient-to-br from-[#FFF3E4] to-[#FFE8D2] overflow-hidden">
       <MaxWidthWrapper>
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 pt-16 md:pt-24 pb-16">
           <motion.div
-            className="w-full flex flex-col mt-20 md:mt-0 justify-center gap-y-6"
+            className="w-full flex flex-col mt-12 md:mt-0 justify-center gap-y-6"
             initial="hidden"
             animate="visible"
             variants={{
@@ -51,14 +54,19 @@ export default function Hero() {
           >
             {/* Text content remains the same */}
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl my-4 font-bold leading-tight"
               variants={fadeIn}
             >
-              <span className="text-[#f46506] inline-block">Studying</span>{" "}
-              <span className="text-[#2F327D] inline-block">Online is now</span>
+              <span className="text-[#f46506] inline-block">
+                {" "}
+                {t("hero.headline1")}
+              </span>{" "}
+              <span className="text-[#2F327D] inline-block">
+                {t("hero.headline2")}
+              </span>
               <br />
               <span className="text-[#2F327D] inline-block bg-gradient-to-r from-[#2F327D] to-[#23BDEE] bg-clip-text text-transparent">
-                much easier
+                {t("hero.headline3")}
               </span>
             </motion.h1>
 
@@ -66,8 +74,7 @@ export default function Hero() {
               className="text-base md:text-lg text-gray-600 max-w-xl"
               variants={fadeIn}
             >
-              Our school is an interesting platform that will teach you <br />{" "}
-              in more an interactive way
+              {t("hero.desc")}
             </motion.p>
 
             <motion.div
@@ -79,7 +86,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Join now
+                {t("hero.button")}
               </motion.button>
 
               <motion.div
@@ -100,7 +107,7 @@ export default function Hero() {
                   <Play className="w-5 h-5 text-[#23BDEE] ml-1" />
                 </motion.div>
                 <span className="font-medium group-hover:text-[#f46506] transition-colors">
-                  Watch how it works
+                  {t("hero.button2")}
                 </span>
               </motion.div>
             </motion.div>
